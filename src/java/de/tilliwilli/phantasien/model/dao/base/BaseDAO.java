@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model;
+package de.tilliwilli.phantasien.model.dao.base;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 

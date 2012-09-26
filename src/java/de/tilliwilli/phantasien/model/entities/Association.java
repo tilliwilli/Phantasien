@@ -20,8 +20,8 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.annotation.Parent;
 
-import de.tilliwilli.phantasien.model.ActiveRecord;
 import de.tilliwilli.phantasien.model.ReadState;
+import de.tilliwilli.phantasien.model.entities.base.ActiveRecord;
 
 /**
  * Associations link {@link User Users} to {@link Book Books}. For each Book a User owns (or is
@@ -101,6 +101,7 @@ public class Association extends ActiveRecord<Association> {
 
 	public void removeCategory(Category cat) {
 		Key<Category> catKey = cat.getKey();
+
 		Iterator<Ref<Category>> it = categories.iterator();
 		while (it.hasNext()) {
 			Ref<Category> ref = it.next();

@@ -1,6 +1,6 @@
 package de.tilliwilli.phantasien.model.dao;
 
-import de.tilliwilli.phantasien.model.BaseDAO;
+import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
 import de.tilliwilli.phantasien.model.entities.Book;
 
 /**

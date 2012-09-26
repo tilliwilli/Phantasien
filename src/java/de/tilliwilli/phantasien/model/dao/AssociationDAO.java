@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import de.tilliwilli.phantasien.model.BaseDAO;
+import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
 import de.tilliwilli.phantasien.model.entities.Association;
 import de.tilliwilli.phantasien.model.entities.Book;
 import de.tilliwilli.phantasien.model.entities.User;

@@ -7,7 +7,7 @@ import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-import de.tilliwilli.phantasien.model.ActiveRecord;
+import de.tilliwilli.phantasien.model.entities.base.ActiveRecord;
 
 /**
  * @author Tilman

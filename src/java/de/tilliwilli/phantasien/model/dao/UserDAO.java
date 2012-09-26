@@ -4,7 +4,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.google.common.base.Preconditions;
 
-import de.tilliwilli.phantasien.model.BaseDAO;
+import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
 import de.tilliwilli.phantasien.model.entities.User;
 
 /**

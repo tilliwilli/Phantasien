@@ -14,7 +14,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
-import de.tilliwilli.phantasien.model.ActiveRecord;
+import de.tilliwilli.phantasien.model.entities.base.ActiveRecord;
 
 /**
  * Categories are <em>tags</em> a user can apply to books. Each category entity is owned by the user
