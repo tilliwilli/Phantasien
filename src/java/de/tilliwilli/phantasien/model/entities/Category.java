@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.tilliwilli.phantasien.model.entities;
 
 import static com.google.common.base.Preconditions.checkNotNull;

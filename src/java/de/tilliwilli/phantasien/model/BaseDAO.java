@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.tilliwilli.phantasien.model;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;

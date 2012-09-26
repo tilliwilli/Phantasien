@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.tilliwilli.phantasien.model;
 
 import de.tilliwilli.phantasien.model.entities.Book;
