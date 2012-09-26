@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Phantasien">
+
+	<property name="sdk.dir" location="../appengine-java-sdk-1.7.2" />
+	<property name="lib.dir" location="./war/WEB-INF/lib" />
+
+	<target name="copyjars" description="Copies the App Engine JARs to the WAR.">
+		<copy
+			file="${sdk.dir}/lib/user/appengine-api-1.0-sdk-1.7.2.jar"
+			todir="${lib.dir}" />
+		<copy 
+			file="${sdk.dir}/lib/user/appengine-api-labs-1.7.2.jar"
+			tofile="${lib.dir}/appengine-api-labs.jar" />
+		<copy
+			file="${sdk.dir}/lib/user/appengine-jsr107cache-1.7.2.jar"
+			todir="${lib.dir}" />
+		<copy
+			file="${sdk.dir}/lib/user/jsr107cache-1.1.jar"
+			todir="${lib.dir}" />
+		<copy
+			file="${sdk.dir}/lib/opt/user/appengine-endpoints/v1/appengine-endpoints.jar"
+			todir="${lib.dir}" />
+	</target>
+</project>

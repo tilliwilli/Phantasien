@@ -4,3 +4,7 @@
 *.jar
 *.war
 *.ear
+
+# complete Folder to ignore
+war/WEB-INF/lib/
+war/WEB-INF/classes/
