@@ -7,21 +7,19 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import javax.inject.Inject;
 
 import de.tilliwilli.phantasien.model.BaseDAO;
-import de.tilliwilli.phantasien.model.entities.Book;
 import de.tilliwilli.phantasien.model.entities.Association;
+import de.tilliwilli.phantasien.model.entities.Book;
 import de.tilliwilli.phantasien.model.entities.User;
 
 /**
  * @author Tilman
  */
-@Repository
 public class AssociationDAO extends BaseDAO<Association> {
 
-	@Autowired
+	@Inject
 	private User user;
 
 	@Override
