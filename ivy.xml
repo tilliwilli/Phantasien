@@ -10,11 +10,17 @@
 		status="integration" />
 	<configurations defaultconf="default"/>
 	<dependencies>
+		<!-- Google App Engine dependencies -->
 		<dependency org="com.google.appengine" name="appengine-api-1.0-sdk" rev="&appengine.version;" />
 		<dependency org="com.google.appengine" name="appengine-api-labs" rev="&appengine.version;" />
 <!-- 		<dependency org="com.google.appengine" name="appengine-endpoints" rev="&appengine.version;" /> -->
 		<dependency org="com.google.appengine" name="appengine-jsr107cache" rev="&appengine.version;" />
 		<dependency org="net.sf.jsr107cache" name="jsr107cache" rev="1.1" />
+
+		<dependency org="javax.servlet" name="servlet-api" rev="2.5" />
+		<dependency org="javax.servlet" name="jsp-api" rev="2.0" />
+		<dependency org="javax.servlet" name="jstl" rev="1.2" />
+		<dependency org="javax.el" name="javax.el-api" rev="2.2.4" />
 
 		<!-- logging framework -->
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.1" />
