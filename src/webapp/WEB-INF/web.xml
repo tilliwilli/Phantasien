@@ -19,4 +19,25 @@
 		<listener-class>de.tilliwilli.phantasien.app.PhantasienServletContextListener</listener-class>
 	</listener>
 
+	<!--	Although almost everything should be processed within our ContextListener, security setup for GAE
+			is most easily done with <security-constraint>s here, and Guice Servlets don't support setting
+			these up in Java -->
+	<security-constraint>
+		<!--	Filter ALL web-pages, so every access to our app is only allowed for users that are logged in -->
+		<web-resource-collection>
+			<web-resource-name>everything</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+
+		<!-- Allow all users: normal ones and admins (it still means that a user has to be logged in) -->
+		<auth-constraint>
+			<role-name>*</role-name>
+		</auth-constraint>
+		
+		<!-- Our whole application should use HTTPS -->
+<!-- 		<user-data-constraint> -->
+<!-- 			<transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+<!-- 		</user-data-constraint> -->
+	</security-constraint>
+
 </web-app>
