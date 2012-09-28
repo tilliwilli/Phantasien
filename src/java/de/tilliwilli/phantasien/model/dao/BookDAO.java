@@ -1,15 +1,15 @@
 package de.tilliwilli.phantasien.model.dao;
 
 import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
-import de.tilliwilli.phantasien.model.entities.Book;
+import de.tilliwilli.phantasien.model.entities.impl.BookImpl;
 
 /**
  * @author Tilman
  */
-public class BookDAO extends BaseDAO<Book> {
+public class BookDAO extends BaseDAO<BookImpl> {
 
 	@Override
-	protected Class<Book> getEntityClass() {
-		return Book.class;
+	protected Class<BookImpl> getEntityClass() {
+		return BookImpl.class;
 	}
 }

@@ -1,11 +1,11 @@
 package de.tilliwilli.phantasien.model;
 
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.entities.impl.BookImpl;
+import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
 
 /**
- * Different values of the ReadState enum define the kind of relation a {@link User} has towards a
- * {@link Book}.
+ * Different values of the ReadState enum define the kind of relation a {@link UserImpl} has towards a
+ * {@link BookImpl}.
  */
 public enum ReadState {
 

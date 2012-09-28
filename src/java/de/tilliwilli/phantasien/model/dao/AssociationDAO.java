@@ -7,30 +7,30 @@ import java.util.List;
 import javax.inject.Inject;
 
 import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
-import de.tilliwilli.phantasien.model.entities.Association;
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.entities.impl.AssociationImpl;
+import de.tilliwilli.phantasien.model.entities.impl.BookImpl;
+import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
 
 /**
  * @author Tilman
  */
-public class AssociationDAO extends BaseDAO<Association> {
+public class AssociationDAO extends BaseDAO<AssociationImpl> {
 
 	@Inject
-	private User user;
+	private UserImpl user;
 
 	@Override
-	protected Class<Association> getEntityClass() {
-		return Association.class;
+	protected Class<AssociationImpl> getEntityClass() {
+		return AssociationImpl.class;
 	}
 
-	public Association getForBook(Book b) {
-		return ofy().load().type(Association.class).ancestor(user).filter("book", b.getKey()).first()
+	public AssociationImpl getForBook(BookImpl b) {
+		return ofy().load().type(AssociationImpl.class).ancestor(user).filter("book", b.getKey()).first()
 				.get();
 	}
 
-	public List<Association> getAllBooks() {
-		return ofy().load().type(Association.class).ancestor(user).list();
+	public List<AssociationImpl> getAllBooks() {
+		return ofy().load().type(AssociationImpl.class).ancestor(user).list();
 	}
 
 }

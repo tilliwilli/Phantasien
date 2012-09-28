@@ -5,21 +5,21 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.google.common.base.Preconditions;
 
 import de.tilliwilli.phantasien.model.dao.base.BaseDAO;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
 
 /**
  * @author Tilman
  */
-public class UserDAO extends BaseDAO<User> {
+public class UserDAO extends BaseDAO<UserImpl> {
 
 	@Override
-	protected Class<User> getEntityClass() {
-		return User.class;
+	protected Class<UserImpl> getEntityClass() {
+		return UserImpl.class;
 	}
 
-	public User getByGoogleUser(com.google.appengine.api.users.User gUser) {
+	public UserImpl getByGoogleUser(com.google.appengine.api.users.User gUser) {
 		Preconditions.checkNotNull(gUser);
-		return ofy().load().type(User.class).filter("googleId", gUser.getUserId()).first().get();
+		return ofy().load().type(UserImpl.class).filter("googleId", gUser.getUserId()).first().get();
 	}
 
 }
