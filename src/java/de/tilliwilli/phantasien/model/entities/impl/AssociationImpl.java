@@ -8,9 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import com.google.common.collect.Sets;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
@@ -24,16 +21,11 @@ import de.tilliwilli.phantasien.model.ReadState;
 import de.tilliwilli.phantasien.model.entities.Association;
 
 /**
- * Associations link {@link UserImpl Users} to {@link BookImpl Books}. For each BookImpl a UserImpl owns (or is
- * connected to in any other way) there has to be an AssociationImpl instance. In the datastore,
- * Associations are child elements of the Users they belong to. <br>
- * This class has access to both it's owning UserImpl and the BookImpl it describes. It has fields
- * containing the {@link ReadState} of the BookImpl for that user, and the {@link CategoryImpl Categories}
- * that this UserImpl has assigned to the book.
+ * Objectfiy-able implementation of an {@link Association}.
  */
 @Entity
 @Cache
-public class AssociationImpl implements Association {
+public class AssociationImpl implements Association, BaseOfyEntity<AssociationImpl> {
 
 	/**
 	 * The ID of this association in the datastore. Auto-generated.
@@ -50,8 +42,6 @@ public class AssociationImpl implements Association {
 
 	private Set<Ref<CategoryImpl>> categories;
 
-	@Getter
-	@Setter
 	private ReadState state;
 
 	/**
@@ -76,13 +66,14 @@ public class AssociationImpl implements Association {
 		state = ReadState.NOT_OWNED;
 	}
 
+	@Override
 	public Key<AssociationImpl> getKey() {
 		return Key.create(user.key(), AssociationImpl.class, id);
 	}
 
 	/**
-	 * Returns a {@link Collection} of all {@link CategoryImpl Categories} that are assigned within this
-	 * association.
+	 * Returns a {@link Collection} of all {@link CategoryImpl Categories} that are assigned within
+	 * this association.
 	 */
 	public Collection<CategoryImpl> getCategories() {
 		Map<Key<CategoryImpl>, CategoryImpl> map = ofy().load().refs(categories);

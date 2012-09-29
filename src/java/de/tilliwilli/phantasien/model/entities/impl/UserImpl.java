@@ -10,11 +10,11 @@ import com.googlecode.objectify.annotation.Id;
 import de.tilliwilli.phantasien.model.entities.User;
 
 /**
- * @author Tilman
+ * Objectify-Implementation of a {@link User}.
  */
 @Entity
 @Cache
-public class UserImpl implements User {
+public class UserImpl implements User, BaseOfyEntity<UserImpl> {
 
 	/**
 	 * The ID in the datastore. For Users, this is set to the ID of the
@@ -32,7 +32,7 @@ public class UserImpl implements User {
 	private UserImpl() {}
 
 	/**
-	 * Creates a new UserImpl based on a {@link com.google.appengine.api.users.User GAE user}.
+	 * Creates a new User based on a {@link com.google.appengine.api.users.User GAE user}.
 	 */
 	public UserImpl(com.google.appengine.api.users.User googleUser) {
 		this.id = googleUser.getUserId();

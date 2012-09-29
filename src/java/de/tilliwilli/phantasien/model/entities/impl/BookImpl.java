@@ -11,12 +11,11 @@ import com.googlecode.objectify.annotation.Id;
 import de.tilliwilli.phantasien.model.entities.Book;
 
 /**
- * @author Tilman
+ * Objectify-compliant {@link Book} implementation.
  */
-
 @Entity
 @Cache
-public class BookImpl implements Book {
+public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 
 	/**
 	 * The ID of this book in the datastore. Auto-generated.

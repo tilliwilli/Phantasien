@@ -26,7 +26,7 @@ import de.tilliwilli.phantasien.model.entities.Category;
  */
 @Entity
 @Cache
-public class CategoryImpl implements Category {
+public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 
 	/**
 	 * The owner of the category. This relation is final after creation, and is enforced in the

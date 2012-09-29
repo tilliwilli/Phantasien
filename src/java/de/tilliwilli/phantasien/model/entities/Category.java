@@ -1,85 +1,37 @@
 package de.tilliwilli.phantasien.model.entities;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.util.Collection;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.Ref;
-import com.googlecode.objectify.annotation.Cache;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Parent;
-
-import de.tilliwilli.phantasien.model.entities.base.ActiveRecord;
-
 /**
- * Categories are <em>tags</em> a user can apply to books. Each category entity is owned by the user
- * who created it, and only that user can assign this category to his books. Categories are used by
- * {@link Association Associations}.
- * <p>
- * A Category a {@link #name} that is a simple String, and an {@link #owner}. The owner is final
- * after creation, but the name can be changed.
+ * Each user can define Categories he wants to assign to {@link Book books}. Categories have a name
+ * and a user they belong to. Once created, the user cannot be changed, but the name can.<br>
+ * A Category instance allows retrieval of all books that are labeled with this category.
  */
-@Entity
-@Cache
-public class Category extends ActiveRecord<Category> {
+public interface Category extends BaseEntity {
 
 	/**
-	 * The owner of the category. This relation is final after creation, and is enforced in the
-	 * datastore.
+	 * Returns the user that owns this category.
 	 */
-	@Parent
-	@Getter
-	private Ref<User> owner;
+	public User getUser();
 
 	/**
-	 * The ID of this category in the datastore. Auto-generated.
+	 * Returns the name of this category. Will never be <tt>null</tt> or empty.
 	 */
-	@Id
-	private Long id;
+	public String getName();
 
 	/**
-	 * The name of the category. This is a simple {@link String} that can be changed.
+	 * Sets the name of this category to <tt>newName</tt> and returns the old name, if there was one.
+	 * 
+	 * @param newName
+	 *           the new name of this category
+	 * @return the old name if there was one, <tt>null</tt> otherwise
 	 */
-	@Getter
-	@Setter
-	private String name;
+	public String setName(String newName);
 
 	/**
-	 * Private no-arg constructor for Objectify.
+	 * Returns all books that are labeled with this category.
+	 * 
+	 * @return an <b>immutable</b> collection of books, may be empty
 	 */
-	@SuppressWarnings("unused")
-	private Category() {}
-
-	/**
-	 * Creates a new Category instance with an owner and a name. The owner must be provided and is
-	 * final after creation.
-	 */
-	public Category(User owner, String name) {
-		checkNotNull(owner);
-		this.owner = Ref.create(owner.getKey(), owner);
-		this.name = name;
-	}
-
-	@Override
-	public Key<Category> getKey() {
-		return Key.create(owner.getKey(), Category.class, id);
-	}
-
-	/**
-	 * Returns all book entities (not just references) that are labeled with this category.
-	 */
-	public Collection<Book> getBooks() {
-		return null;
-	}
-
-	/**
-	 * Retrieve all Categories of the given user.<br>
-	 * <code>user</code> must be a {@link Key} or an {@link Entity}.
-	 */
-
+	public Collection<Book> getBooks();
 }
