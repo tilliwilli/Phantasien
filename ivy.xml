@@ -31,9 +31,6 @@
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.1" />
 		<dependency org="org.slf4j" name="slf4j-jdk14" rev="1.7.1" />
 
-		<!-- Lombok for easy creation of Getters/Setters -->
-		<dependency org="org.projectlombok" name="lombok" rev="0.11.4" />
-		
 		<!-- Guava as a general-purpose language enhancement library -->
 		<dependency org="com.google.guava" name="guava" rev="13.0.1" />
 		
