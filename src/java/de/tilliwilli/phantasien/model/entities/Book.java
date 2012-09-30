@@ -1,7 +1,5 @@
 package de.tilliwilli.phantasien.model.entities;
 
-import java.util.Collection;
-
 import de.tilliwilli.phantasien.model.ReadState;
 
 /**
@@ -22,7 +20,7 @@ public interface Book extends BaseEntity {
 	 * Returns all {@link Category categories} this book has assigned. The returned collection is
 	 * <b>immutable</b>.
 	 */
-	public Collection<Category> getCategories();
+	public Iterable<? extends Category> getCategories();
 
 	/**
 	 * Adds a category assignment to this book. If the category is already assigned, nothing happens.
@@ -134,6 +132,9 @@ public interface Book extends BaseEntity {
 	 * Returns a String containing the location of an image of this book. This string can be a URL,
 	 * but it can also be a path in the filesystem or represent any other means of locating an image.
 	 * The actual meaning of this string is application specific.<br>
+	 * An image location can be either external or internal, determined when the location is set.
+	 * Whether the location is external can be queried with {@link #isExternalImage()}.
+	 * <p>
 	 * Returns <tt>null</tt> if the image location is not set.
 	 */
 	public String getImageLocation();
@@ -141,10 +142,24 @@ public interface Book extends BaseEntity {
 	/**
 	 * Sets the image location for this book.
 	 * 
+	 * @param newImageLoc
+	 *           the new location
+	 * @param isExternal
+	 *           <tt>true</tt> if this location somehow refers a resource outside of this
+	 *           application, see {@link #isExternalImage()}
 	 * @see #getImageLocation()
 	 * @return this book for convenience
 	 */
-	public Book setImageLocation(String newImageLoc);
+	public Book setImageLocation(String newImageLoc, boolean isExternal);
+
+	/**
+	 * Determines whether the image location refers to an external image, like an image somewhere on
+	 * the web.
+	 * 
+	 * @return <tt>true</tt> if the image is located outside of the application, or <tt>false</tt> if
+	 *         the image location somehow refers an object inside, like a URN
+	 */
+	public boolean isExternalImage();
 
 	/**
 	 * Returns the ISBN-<b>10</b> of this book, or <tt>null</tt> if not set.

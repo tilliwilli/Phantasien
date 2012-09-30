@@ -1,11 +1,8 @@
 package de.tilliwilli.phantasien.model.entities;
 
-import java.util.Collection;
-
 /**
- * Each user can define Categories he wants to assign to {@link Book books}. Categories have a name
- * and a user they belong to. Once created, the user cannot be changed, but the name can.<br>
- * A Category instance allows retrieval of all books that are labeled with this category.
+ * Categories are <em>tags</em> a user can apply to books. Each category entity is owned by the user
+ * who created it, and only that user can assign this category to his books.
  */
 public interface Category extends BaseEntity {
 
@@ -31,7 +28,7 @@ public interface Category extends BaseEntity {
 	/**
 	 * Returns all books that are labeled with this category.
 	 * 
-	 * @return an <b>immutable</b> collection of books, may be empty
+	 * @return an <b>immutable</b> iterable of books, may be empty
 	 */
-	public Collection<Book> getBooks();
+	public Iterable<? extends Book> getBooks();
 }

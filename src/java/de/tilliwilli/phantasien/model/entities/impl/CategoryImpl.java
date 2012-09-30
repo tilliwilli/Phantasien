@@ -1,12 +1,10 @@
 package de.tilliwilli.phantasien.model.entities.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.googlecode.objectify.ObjectifyService.ofy;
 
-import java.util.Collection;
-
-import lombok.Getter;
-import lombok.Setter;
-
+import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Cache;
@@ -15,14 +13,10 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
 import de.tilliwilli.phantasien.model.entities.Category;
+import de.tilliwilli.phantasien.model.entities.User;
 
 /**
- * Categories are <em>tags</em> a user can apply to books. Each category entity is owned by the user
- * who created it, and only that user can assign this category to his books. Categories are used by
- * {@link AssociationImpl Associations}.
- * <p>
- * A CategoryImpl a {@link #name} that is a simple String, and an {@link #owner}. The owner is final
- * after creation, but the name can be changed.
+ * Objectify-compliant {@link Category} implementation
  */
 @Entity
 @Cache
@@ -33,7 +27,6 @@ public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 	 * datastore.
 	 */
 	@Parent
-	@Getter
 	private Ref<UserImpl> owner;
 
 	/**
@@ -45,24 +38,27 @@ public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 	/**
 	 * The name of the category. This is a simple {@link String} that can be changed.
 	 */
-	@Getter
-	@Setter
 	private String name;
 
-	/**
-	 * Private no-arg constructor for Objectify.
-	 */
+	// Private no-arg constructor for Objectify.
 	@SuppressWarnings("unused")
 	private CategoryImpl() {}
 
 	/**
 	 * Creates a new CategoryImpl instance with an owner and a name. The owner must be provided and
 	 * is final after creation.
+	 * 
+	 * @param owner
+	 *           the {@link UserImpl user} this category belongs to.
 	 */
-	public CategoryImpl(UserImpl owner, String name) {
+	CategoryImpl(UserImpl owner) {
 		checkNotNull(owner);
 		this.owner = Ref.create(owner.getKey(), owner);
-		this.name = name;
+	}
+
+	CategoryImpl(Key<UserImpl> ownerKey) {
+		checkNotNull(ownerKey);
+		this.owner = Ref.create(ownerKey);
 	}
 
 	@Override
@@ -70,16 +66,49 @@ public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 		return Key.create(owner.getKey(), CategoryImpl.class, id);
 	}
 
-	/**
-	 * Returns all book entities (not just references) that are labeled with this category.
-	 */
-	public Collection<BookImpl> getBooks() {
-		return null;
+	@Override
+	public String getId() {
+		if (id == null) { return null; }
+		return id.toString();
 	}
 
-	/**
-	 * Retrieve all Categories of the given user.<br>
-	 * <code>user</code> must be a {@link Key} or an {@link Entity}.
-	 */
+	@Override
+	public void save() {
+		ofy().save().entity(this).now();
+	}
 
+	@Override
+	public void remove() {
+		ofy().delete().entity(this).now();
+	}
+
+	@Override
+	public User getUser() {
+		return owner.get();
+	}
+
+	@Override
+	public Iterable<BookImpl> getBooks() {
+		//@formatter:off
+		Iterable<BookImpl> books = ofy().load()
+			.type(BookImpl.class)
+			.ancestor(owner)
+			.filter("categories", this)
+			.iterable();
+		//@formatter:on
+
+		return Iterables.unmodifiableIterable(books);
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String setName(String newName) {
+		String oldName = Strings.emptyToNull(name);
+		this.name = Strings.emptyToNull(newName);
+		return oldName;
+	}
 }

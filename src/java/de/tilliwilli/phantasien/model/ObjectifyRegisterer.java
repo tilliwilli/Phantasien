@@ -5,7 +5,6 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.googlecode.objectify.ObjectifyService;
 
-import de.tilliwilli.phantasien.model.entities.impl.AssociationImpl;
 import de.tilliwilli.phantasien.model.entities.impl.BookImpl;
 import de.tilliwilli.phantasien.model.entities.impl.CategoryImpl;
 import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
@@ -22,7 +21,6 @@ public class ObjectifyRegisterer {
 	private static Set<Class<?>> classes = Sets.newHashSet();
 
 	static {
-		classes.add(AssociationImpl.class);
 		classes.add(BookImpl.class);
 		classes.add(CategoryImpl.class);
 		classes.add(UserImpl.class);
