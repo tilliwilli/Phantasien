@@ -2,10 +2,15 @@ package de.tilliwilli.phantasien.app;
 
 import java.util.Map;
 
+import javax.servlet.Filter;
+
 import com.google.common.collect.Maps;
 import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 
+/**
+ * Simple {@link ServletModule} that sets up all {@link Filter}s needed for our application.
+ */
 public class FilterModule extends ServletModule {
 
 	@Override

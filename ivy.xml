@@ -33,6 +33,8 @@
 
 		<!-- Guava as a general-purpose language enhancement library -->
 		<dependency org="com.google.guava" name="guava" rev="13.0.1" />
+		<!-- JSR-305 for @Nullable annotation -->
+		<dependency org="com.google.code.findbugs" name="jsr305" rev="2.0.1" />
 		
 		<!-- Guice for dependency injection -->
 		<dependency org="com.google.inject" name="guice" rev="3.0" />
