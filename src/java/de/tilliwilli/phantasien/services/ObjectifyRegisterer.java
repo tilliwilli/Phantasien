@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model;
+package de.tilliwilli.phantasien.services;
 
 import java.util.Set;
 

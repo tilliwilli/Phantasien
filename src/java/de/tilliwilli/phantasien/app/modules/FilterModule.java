@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.app;
+package de.tilliwilli.phantasien.app.modules;
 
 import java.util.Map;
 
@@ -7,6 +7,8 @@ import javax.servlet.Filter;
 import com.google.common.collect.Maps;
 import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
+
+import de.tilliwilli.phantasien.app.CharacterEncodingFilter;
 
 /**
  * Simple {@link ServletModule} that sets up all {@link Filter}s needed for our application.

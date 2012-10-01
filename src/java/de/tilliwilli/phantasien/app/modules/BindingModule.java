@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.app;
+package de.tilliwilli.phantasien.app.modules;
 
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;

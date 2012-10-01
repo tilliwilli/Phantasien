@@ -7,7 +7,8 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
 
-import de.tilliwilli.phantasien.model.ObjectifyRegisterer;
+import de.tilliwilli.phantasien.app.modules.FilterModule;
+import de.tilliwilli.phantasien.services.ObjectifyRegisterer;
 
 /**
  * The {@link GuiceServletContextListener} that bootstraps all our {@link Module}s for dependency

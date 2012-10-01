@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.providers;
+package de.tilliwilli.phantasien.services.provider;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
@@ -11,8 +11,12 @@ import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
 
 public class CurrentUserProvider implements Provider<User> {
 
-	@Inject
 	private UserService userService;
+
+	@Inject
+	public CurrentUserProvider(UserService userService) {
+		this.userService = userService;
+	}
 
 	@Override
 	public User get() {
