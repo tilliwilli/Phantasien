@@ -1,5 +1,6 @@
 package de.tilliwilli.phantasien.services.provider;
 
+import static com.google.common.base.Preconditions.checkState;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.google.appengine.api.users.UserService;
@@ -21,11 +22,13 @@ public class CurrentUserProvider implements Provider<User> {
 	@Override
 	public User get() {
 		com.google.appengine.api.users.User gaeUser = userService.getCurrentUser();
+		checkState(gaeUser != null);
 
-		if (gaeUser == null) { return null; }
 		String id = gaeUser.getUserId();
 
 		User user = ofy().load().type(UserImpl.class).id(id).get();
+		checkState(user != null);
+
 		return user;
 	}
 }

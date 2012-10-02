@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.app;
+package de.tilliwilli.phantasien.app.filters;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -12,10 +12,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import com.google.common.base.Strings;
+import com.google.inject.Singleton;
 
 /**
  * Simple {@link Filter} that makes sure that a character encoding is set for each request.
  */
+@Singleton
 public class CharacterEncodingFilter implements Filter {
 
 	private String encoding;

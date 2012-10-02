@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.app;
+package de.tilliwilli.phantasien.app.filters;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 import com.google.common.base.Strings;
+import com.google.inject.Singleton;
 
+@Singleton
 public class HiddenHttpMethodFilter implements Filter {
 
 	/** Default method parameter: <code>_method</code> */
@@ -35,14 +37,14 @@ public class HiddenHttpMethodFilter implements Filter {
 	 * {@link HttpServletRequest#getMethod()}.
 	 */
 	private static class HttpMethodRequestWrapper extends HttpServletRequestWrapper {
-	
+
 		private final String method;
-	
+
 		public HttpMethodRequestWrapper(HttpServletRequest request, String method) {
 			super(request);
 			this.method = method;
 		}
-	
+
 		@Override
 		public String getMethod() {
 			return this.method;
