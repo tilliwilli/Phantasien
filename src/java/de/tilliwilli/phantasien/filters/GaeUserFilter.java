@@ -12,9 +12,22 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+/**
+ * <p>
+ * Filter that makes sure that the user is logged into Google AppEngine.
+ * </p>
+ * <p>
+ * If the user is not logged in (that is, if {@link UserService#isUserLoggedIn()} returns
+ * <tt>false</tt>), redirects the user to the GAE login-page, and after logging in, redirects the
+ * user to the same page he requested currently.
+ * </p>
+ */
 @Singleton
 public class GaeUserFilter extends HttpFilterBase {
 
+	/**
+	 * The GAE {@link UserService}.
+	 */
 	private UserService userService;
 
 	@Inject

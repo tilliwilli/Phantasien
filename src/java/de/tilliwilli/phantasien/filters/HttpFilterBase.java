@@ -13,6 +13,14 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Base class for filters that only work with {@link HttpServletRequest HttpServletRequests} and
+ * responses. Checks that the {@link ServletRequest} passed to {@link #doFilter} is actually an
+ * <tt>HttpServletRequest</tt> (and for the response) and calls {@link #doFilterInternal} with
+ * casted values.<br>
+ * Also provides dummy implementations for {@link #init} and {@link #destroy}.
+ * 
+ */
 public abstract class HttpFilterBase implements Filter {
 
 	@Override
