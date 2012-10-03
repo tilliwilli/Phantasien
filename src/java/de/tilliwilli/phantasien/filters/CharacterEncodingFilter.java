@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.app.filters;
+package de.tilliwilli.phantasien.filters;
 
 import static com.google.common.base.Preconditions.checkState;
 
