@@ -5,10 +5,15 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
+import de.tilliwilli.phantasien.model.dao.UserDAO;
+import de.tilliwilli.phantasien.model.dao.impl.UserDAOImpl;
+
 public class BindingModule extends AbstractModule {
 
 	@Override
-	protected void configure() {}
+	protected void configure() {
+		bind(UserDAO.class).to(UserDAOImpl.class);
+	}
 
 	@Provides
 	UserService provideUserService() {
