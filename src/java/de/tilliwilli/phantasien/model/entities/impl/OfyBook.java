@@ -4,17 +4,19 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import com.google.appengine.api.blobstore.BlobKey;
 import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
 import de.tilliwilli.phantasien.model.ReadState;
@@ -27,7 +29,7 @@ import de.tilliwilli.phantasien.model.entities.User;
  */
 @Entity
 @Cache
-public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
+public class OfyBook implements Book, BaseOfyEntity<OfyBook> {
 
 	/**
 	 * The ID of this book in the datastore. Auto-generated.
@@ -36,15 +38,16 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	private Long id;
 
 	/**
-	 * The {@link UserImpl user} this book belongs to.
+	 * The {@link OfyUser user} this book belongs to.
 	 */
 	@Parent
-	private Ref<UserImpl> user;
+	private Ref<OfyUser> user;
 
 	/**
-	 * The {@link Set} of {@link CategoryImpl categories} that are assigned to this book.
+	 * The {@link Set} of {@link OfyCategory categories} that are assigned to this book.<br>
 	 */
-	private Set<Ref<CategoryImpl>> categories = Sets.newHashSet();
+	@Index
+	private Set<Ref<OfyCategory>> categories = Sets.newHashSet();
 
 	/**
 	 * The {@link ReadState} of this book.
@@ -105,7 +108,7 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 
 	// Private no-arg contructor for Objectify.
 	@SuppressWarnings("unused")
-	private BookImpl() {}
+	private OfyBook() {}
 
 	/**
 	 * Creates a new book instance. The owning user is the only necessary parameter, since that
@@ -115,9 +118,9 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	 * {@link ReadState#NOT_READ}. All other fields are empty.
 	 * 
 	 * @param owner
-	 *           the {@link UserImpl user} this book belongs to
+	 *           the {@link OfyUser user} this book belongs to
 	 */
-	BookImpl(UserImpl owner) {
+	OfyBook(OfyUser owner) {
 		checkNotNull(owner);
 		this.user = Ref.create(owner.getKey(), owner);
 	}
@@ -130,21 +133,23 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	 * {@link ReadState#NOT_READ}. All other fields are empty.
 	 * 
 	 * @param owner
-	 *           the {@link Key key} of the {@link UserImpl user} this book belongs to
+	 *           the {@link Key key} of the {@link OfyUser user} this book belongs to
 	 */
-	BookImpl(Key<UserImpl> ownerKey) {
+	OfyBook(Key<OfyUser> ownerKey) {
 		checkNotNull(ownerKey);
 		this.user = Ref.create(ownerKey);
 	}
 
 	@Override
-	public Key<BookImpl> getKey() {
-		return Key.create(user.key(), BookImpl.class, id);
+	public Key<OfyBook> getKey() {
+		return Key.create(user.key(), OfyBook.class, id);
 	}
 
 	@Override
 	public String getId() {
-		if (id == null) { return null; }
+		if (id == null) {
+			return null;
+		}
 		return id.toString();
 	}
 
@@ -164,16 +169,16 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	}
 
 	@Override
-	public Iterable<CategoryImpl> getCategories() {
-		Iterable<CategoryImpl> cats = ofy().load().refs(categories).values();
-		return Iterables.unmodifiableIterable(cats);
+	public Collection<Category> getCategories() {
+		Collection<OfyCategory> cats = ofy().load().refs(categories).values();
+		return Collections.<Category>unmodifiableCollection(cats);
 	}
 
 	@Override
 	public Book addCategory(Category category) {
 		// up to now, we only support objectify'd CategoryImpls
-		checkArgument(category instanceof CategoryImpl);
-		CategoryImpl catImpl = (CategoryImpl) category;
+		checkArgument(category instanceof OfyCategory);
+		OfyCategory catImpl = (OfyCategory) category;
 
 		// check that the given category belongs to the same user as we do
 		checkArgument(catImpl.getUser().equals(this.getUser()));
@@ -185,8 +190,8 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	@Override
 	public Book removeCategory(Category category) {
 		// up to now, we only support objectify'd CategoryImpls
-		checkArgument(category instanceof CategoryImpl);
-		CategoryImpl catImpl = (CategoryImpl) category;
+		checkArgument(category instanceof OfyCategory);
+		OfyCategory catImpl = (OfyCategory) category;
 
 		// since references compare equality only based on their keys, we create a dummy reference
 		// to the given category and remove that from our categories set
@@ -197,11 +202,11 @@ public class BookImpl implements Book, BaseOfyEntity<BookImpl> {
 	@Override
 	public boolean hasAssigned(Category category) {
 		// up to now, we only support objectify'd CategoryImpls
-		checkArgument(category instanceof CategoryImpl);
-		CategoryImpl catImpl = (CategoryImpl) category;
+		checkArgument(category instanceof OfyCategory);
+		OfyCategory catImpl = (OfyCategory) category;
 
 		// see #removeCategories
-		Ref<CategoryImpl> ref = Ref.create(catImpl.getKey());
+		Ref<OfyCategory> ref = Ref.create(catImpl.getKey());
 		return categories.contains(ref);
 	}
 

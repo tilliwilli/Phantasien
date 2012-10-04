@@ -3,8 +3,11 @@ package de.tilliwilli.phantasien.model.entities.impl;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Ref;
 import com.googlecode.objectify.annotation.Cache;
@@ -12,6 +15,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
+import de.tilliwilli.phantasien.model.entities.Book;
 import de.tilliwilli.phantasien.model.entities.Category;
 import de.tilliwilli.phantasien.model.entities.User;
 
@@ -20,14 +24,14 @@ import de.tilliwilli.phantasien.model.entities.User;
  */
 @Entity
 @Cache
-public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
+public class OfyCategory implements Category, BaseOfyEntity<OfyCategory> {
 
 	/**
 	 * The owner of the category. This relation is final after creation, and is enforced in the
 	 * datastore.
 	 */
 	@Parent
-	private Ref<UserImpl> owner;
+	private Ref<OfyUser> owner;
 
 	/**
 	 * The ID of this category in the datastore. Auto-generated.
@@ -42,33 +46,35 @@ public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 
 	// Private no-arg constructor for Objectify.
 	@SuppressWarnings("unused")
-	private CategoryImpl() {}
+	private OfyCategory() {}
 
 	/**
-	 * Creates a new CategoryImpl instance with an owner and a name. The owner must be provided and
-	 * is final after creation.
+	 * Creates a new OfyCategory instance with an owner and a name. The owner must be provided and is
+	 * final after creation.
 	 * 
 	 * @param owner
-	 *           the {@link UserImpl user} this category belongs to.
+	 *           the {@link OfyUser user} this category belongs to.
 	 */
-	CategoryImpl(UserImpl owner) {
+	OfyCategory(OfyUser owner) {
 		checkNotNull(owner);
 		this.owner = Ref.create(owner.getKey(), owner);
 	}
 
-	CategoryImpl(Key<UserImpl> ownerKey) {
+	OfyCategory(Key<OfyUser> ownerKey) {
 		checkNotNull(ownerKey);
 		this.owner = Ref.create(ownerKey);
 	}
 
 	@Override
-	public Key<CategoryImpl> getKey() {
-		return Key.create(owner.getKey(), CategoryImpl.class, id);
+	public Key<OfyCategory> getKey() {
+		return Key.create(owner.getKey(), OfyCategory.class, id);
 	}
 
 	@Override
 	public String getId() {
-		if (id == null) { return null; }
+		if (id == null) {
+			return null;
+		}
 		return id.toString();
 	}
 
@@ -88,16 +94,17 @@ public class CategoryImpl implements Category, BaseOfyEntity<CategoryImpl> {
 	}
 
 	@Override
-	public Iterable<BookImpl> getBooks() {
+	public Collection<Book> getBooks() {
 		//@formatter:off
-		Iterable<BookImpl> books = ofy().load()
-			.type(BookImpl.class)
-			.ancestor(owner)
-			.filter("categories", this)
-			.iterable();
+		List<OfyBook> books = 
+				ofy().load()
+				.type(OfyBook.class)
+				.ancestor(owner)
+				.filter("categories", this)
+				.list();
 		//@formatter:on
 
-		return Iterables.unmodifiableIterable(books);
+		return Collections.<Book>unmodifiableCollection(books);
 	}
 
 	@Override

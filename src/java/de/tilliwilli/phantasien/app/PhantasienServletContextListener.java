@@ -7,6 +7,8 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
 
+import de.tilliwilli.phantasien.app.modules.BindingModule;
+import de.tilliwilli.phantasien.app.modules.ControllerModule;
 import de.tilliwilli.phantasien.app.modules.FilterModule;
 import de.tilliwilli.phantasien.services.ObjectifyRegisterer;
 
@@ -28,7 +30,13 @@ public class PhantasienServletContextListener extends GuiceServletContextListene
 
 	@Override
 	protected Injector getInjector() {
-		return Guice.createInjector(new FilterModule());
+		//@formatter:off
+		return Guice.createInjector(
+				new BindingModule(),
+				new FilterModule(),
+				new ControllerModule()
+		);
+		//@formatter:on
 	}
 
 }

@@ -5,9 +5,9 @@ import java.util.Set;
 import com.google.common.collect.Sets;
 import com.googlecode.objectify.ObjectifyService;
 
-import de.tilliwilli.phantasien.model.entities.impl.BookImpl;
-import de.tilliwilli.phantasien.model.entities.impl.CategoryImpl;
-import de.tilliwilli.phantasien.model.entities.impl.UserImpl;
+import de.tilliwilli.phantasien.model.entities.impl.OfyBook;
+import de.tilliwilli.phantasien.model.entities.impl.OfyCategory;
+import de.tilliwilli.phantasien.model.entities.impl.OfyUser;
 
 /**
  * Helper class to register all entity classes at {@link ObjectifyService}.
@@ -21,9 +21,9 @@ public class ObjectifyRegisterer {
 	private static Set<Class<?>> classes = Sets.newHashSet();
 
 	static {
-		classes.add(BookImpl.class);
-		classes.add(CategoryImpl.class);
-		classes.add(UserImpl.class);
+		classes.add(OfyBook.class);
+		classes.add(OfyCategory.class);
+		classes.add(OfyUser.class);
 	}
 
 	/**

@@ -4,11 +4,13 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
@@ -24,7 +26,7 @@ import de.tilliwilli.phantasien.model.entities.User;
  */
 @Entity
 @Cache
-public class UserImpl implements User, BaseOfyEntity<UserImpl> {
+public class OfyUser implements User, BaseOfyEntity<OfyUser> {
 
 	/**
 	 * The ID in the datastore. For Users, this is set to the ID of the
@@ -40,19 +42,19 @@ public class UserImpl implements User, BaseOfyEntity<UserImpl> {
 	 * Private no-arg constructor for Objectify.
 	 */
 	@SuppressWarnings("unused")
-	private UserImpl() {}
+	private OfyUser() {}
 
 	/**
 	 * Creates a new User based on a {@link com.google.appengine.api.users.User GAE user}.
 	 */
-	public UserImpl(com.google.appengine.api.users.User googleUser) {
+	public OfyUser(com.google.appengine.api.users.User googleUser) {
 		checkNotNull(googleUser);
 		this.id = googleUser.getUserId();
 	}
 
 	@Override
-	public Key<UserImpl> getKey() {
-		return Key.create(UserImpl.class, id);
+	public Key<OfyUser> getKey() {
+		return Key.create(OfyUser.class, id);
 	}
 
 	@Override
@@ -96,19 +98,19 @@ public class UserImpl implements User, BaseOfyEntity<UserImpl> {
 		} catch (NumberFormatException e) {
 			return null;
 		}
-		Key<BookImpl> key = Key.create(this.getKey(), BookImpl.class, idL);
+		Key<OfyBook> key = Key.create(this.getKey(), OfyBook.class, idL);
 		return ofy().load().key(key).get();
 	}
 
 	@Override
-	public Iterable<BookImpl> getAllBooks() {
-		Iterable<BookImpl> books = ofy().load().type(BookImpl.class).ancestor(this).iterable();
-		return Iterables.unmodifiableIterable(books);
+	public Collection<Book> getAllBooks() {
+		List<OfyBook> books = ofy().load().type(OfyBook.class).ancestor(this).list();
+		return Collections.<Book>unmodifiableCollection(books);
 	}
 
 	@Override
 	public Book createBook() {
-		return new BookImpl(this);
+		return new OfyBook(this);
 	}
 
 	@Override
@@ -120,19 +122,19 @@ public class UserImpl implements User, BaseOfyEntity<UserImpl> {
 		} catch (NumberFormatException e) {
 			return null;
 		}
-		Key<CategoryImpl> key = Key.create(this.getKey(), CategoryImpl.class, idL);
+		Key<OfyCategory> key = Key.create(this.getKey(), OfyCategory.class, idL);
 		return ofy().load().key(key).get();
 	}
 
 	@Override
-	public Iterable<? extends Category> getAllCategories() {
-		Iterable<CategoryImpl> cats = ofy().load().type(CategoryImpl.class).ancestor(this).iterable();
-		return Iterables.unmodifiableIterable(cats);
+	public Collection<Category> getAllCategories() {
+		List<OfyCategory> cats = ofy().load().type(OfyCategory.class).ancestor(this).list();
+		return Collections.<Category>unmodifiableCollection(cats);
 	}
 
 	@Override
 	public Category createCategory() {
-		return new CategoryImpl(this);
+		return new OfyCategory(this);
 	}
 
 }

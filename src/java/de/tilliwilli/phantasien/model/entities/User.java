@@ -1,5 +1,6 @@
 package de.tilliwilli.phantasien.model.entities;
 
+import java.util.Collection;
 import java.util.Map;
 
 import de.tilliwilli.phantasien.model.ReadState;
@@ -54,7 +55,7 @@ public interface User extends BaseEntity {
 	 * Returns all the books this user manages. The returned collection is <b>immutable</b> and might
 	 * be empty.
 	 */
-	public Iterable<? extends Book> getAllBooks();
+	public Collection<Book> getAllBooks();
 
 	/**
 	 * Creates a new {@link Book} instance belonging to the user and returns it. The Book is not
@@ -78,7 +79,7 @@ public interface User extends BaseEntity {
 	 * Returns all categories this user has defined. The returned collection is <b>immutable</b> and
 	 * might be empty.
 	 */
-	public Iterable<? extends Category> getAllCategories();
+	public Collection<Category> getAllCategories();
 
 	/**
 	 * Creates a new {@link Category} instance belonging to the user and returns it. The category is

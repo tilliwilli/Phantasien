@@ -1,5 +1,7 @@
 package de.tilliwilli.phantasien.model.entities;
 
+import java.util.Collection;
+
 import de.tilliwilli.phantasien.model.ReadState;
 
 /**
@@ -20,7 +22,7 @@ public interface Book extends BaseEntity {
 	 * Returns all {@link Category categories} this book has assigned. The returned collection is
 	 * <b>immutable</b>.
 	 */
-	public Iterable<? extends Category> getCategories();
+	public Collection<Category> getCategories();
 
 	/**
 	 * Adds a category assignment to this book. If the category is already assigned, nothing happens.
