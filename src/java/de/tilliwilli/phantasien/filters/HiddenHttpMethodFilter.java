@@ -53,7 +53,6 @@ public class HiddenHttpMethodFilter extends HttpFilterBase {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain) throws IOException, ServletException {
-
 		String method = request.getParameter(methodParam);
 		if ("POST".equals(request.getMethod()) && !Strings.isNullOrEmpty(method)) {
 			method = method.toUpperCase(Locale.ENGLISH);

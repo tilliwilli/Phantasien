@@ -72,7 +72,7 @@ public class UserFilter extends HttpFilterBase {
 
 		com.google.appengine.api.users.User gaeUser = userService.getCurrentUser();
 		checkState(gaeUser != null,
-				"There must always be a GAE user. Make sure to invoke GaeUserFilter before UserFilter!");
+				"There must always be a GAE user. Make sure to invoke GaeUserFilter before UserFilter.");
 
 		String id = gaeUser.getUserId();
 		User user = userDao.getUserById(id);
