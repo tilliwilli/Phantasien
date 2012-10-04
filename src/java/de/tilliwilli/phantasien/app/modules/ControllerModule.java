@@ -6,5 +6,4 @@ public class ControllerModule extends MvcModule {
 
 	@Override
 	protected void configureControllers() {}
-
 }

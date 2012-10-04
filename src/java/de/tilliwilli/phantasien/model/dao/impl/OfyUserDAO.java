@@ -9,6 +9,9 @@ import de.tilliwilli.phantasien.model.dao.UserDAO;
 import de.tilliwilli.phantasien.model.entities.User;
 import de.tilliwilli.phantasien.model.entities.impl.OfyUser;
 
+/**
+ * Onjectify-compliant implementation of a {@link UserDAO}.
+ */
 public class OfyUserDAO implements UserDAO {
 
 	@Override

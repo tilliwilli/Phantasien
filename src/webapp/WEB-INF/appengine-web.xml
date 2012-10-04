@@ -16,12 +16,12 @@
 	</system-properties>
 
 	<!-- Enable HTTP sessions, and store them synchronously in the datastore as well as in mem-cache -->
-<!-- 	<sessions-enabled>true</sessions-enabled> -->
+	<sessions-enabled>true</sessions-enabled>
 	
-	<!--	With this feature enabled, session data is written to the datastore asynchronously, which may 
+	<!--	With this feature enabled, sessions are written to the datastore asynchronously, which may 
 			cause the session not to have the most recent data, but therefore latency is reduced.
 			Session data is still written to mem-cache synchronously, so the chance of fallback to the 
 			datastore and retrieving stale data is quite low! -->
-<!-- 	<async-session-persistence enabled="true" /> -->
+	<async-session-persistence enabled="true" />
 	
 </appengine-web-app>

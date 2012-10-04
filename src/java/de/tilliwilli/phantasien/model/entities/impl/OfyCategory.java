@@ -20,7 +20,7 @@ import de.tilliwilli.phantasien.model.entities.Category;
 import de.tilliwilli.phantasien.model.entities.User;
 
 /**
- * Objectify-compliant {@link Category} implementation
+ * Objectify-compliant {@link Category} implementation.
  */
 @Entity
 @Cache
