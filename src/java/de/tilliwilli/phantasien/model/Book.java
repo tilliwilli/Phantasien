@@ -2,6 +2,7 @@ package de.tilliwilli.phantasien.model;
 
 import java.util.Collection;
 
+import com.google.common.base.Optional;
 
 /**
  * A Book is the central entity of this application. Books belong to {@link User Users}, and once a
@@ -18,8 +19,10 @@ public interface Book extends BaseEntity {
 	public User getUser();
 
 	/**
-	 * Returns all {@link Category categories} this book has assigned. The returned collection is
-	 * <b>immutable</b>.
+	 * Returns all {@link Category categories} this book has assigned.
+	 * <p>
+	 * The returned collection is <b>immutable</b>.
+	 * </p>
 	 */
 	public Collection<Category> getCategories();
 
@@ -46,7 +49,7 @@ public interface Book extends BaseEntity {
 	public boolean hasAssigned(Category category);
 
 	/**
-	 * Returns the {@link ReadState} of this book.
+	 * Returns the {@link ReadState} of this book. Will never be <tt>null</tt>.
 	 */
 	public ReadState getReadState();
 
@@ -58,9 +61,9 @@ public interface Book extends BaseEntity {
 	public Book setReadState(ReadState newState);
 
 	/**
-	 * Returns the title of this book, or <tt>null</tt> if not set.
+	 * Returns the title of this book, wrapped in an {@link Optional}.
 	 */
-	public String getTitle();
+	public Optional<String> getTitle();
 
 	/**
 	 * Sets the title of this book.
@@ -72,7 +75,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the subtitle of this book, or <tt>null</tt> if not set.
 	 */
-	public String getSubTitle();
+	public Optional<String> getSubtitle();
 
 	/**
 	 * Sets the subtitle of this book.
@@ -84,7 +87,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the author of this book, or <tt>null</tt> if not set.
 	 */
-	public String getAuthor();
+	public Optional<String> getAuthor();
 
 	/**
 	 * Sets the author of this book.
@@ -96,7 +99,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the number of pages in this book, or <b>-1</b> if not set.
 	 */
-	public Integer getPages();
+	public Optional<Integer> getPages();
 
 	/**
 	 * Sets the number of pages in this book.
@@ -108,7 +111,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the giver of this book, or <tt>null</tt> if not set.
 	 */
-	public String getGiver();
+	public Optional<String> getGiver();
 
 	/**
 	 * Sets the giver of this book.
@@ -120,7 +123,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the location of this book, or <tt>null</tt> if not set.
 	 */
-	public String getLocation();
+	public Optional<String> getLocation();
 
 	/**
 	 * Sets the location of this book.
@@ -138,7 +141,7 @@ public interface Book extends BaseEntity {
 	 * <p>
 	 * Returns <tt>null</tt> if the image location is not set.
 	 */
-	public String getImageLocation();
+	public Optional<String> getImageLocation();
 
 	/**
 	 * Sets the image location for this book.
@@ -165,7 +168,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the ISBN-<b>10</b> of this book, or <tt>null</tt> if not set.
 	 */
-	public String getISBN10();
+	public Optional<String> getISBN10();
 
 	/**
 	 * Sets the ISBN-<b>10</b> of this book.
@@ -177,7 +180,7 @@ public interface Book extends BaseEntity {
 	/**
 	 * Returns the ISBN-<b>13</b> of this book, or <tt>null</tt> if not set.
 	 */
-	public String getISBN13();
+	public Optional<String> getISBN13();
 
 	/**
 	 * Sets the ISBN-<b>13</b> of this book.

@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import com.google.appengine.api.blobstore.BlobKey;
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.Sets;
 import com.googlecode.objectify.Key;
@@ -222,8 +223,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getTitle() {
-		return title;
+	public Optional<String> getTitle() {
+		return Optional.fromNullable(title);
 	}
 
 	@Override
@@ -233,8 +234,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getAuthor() {
-		return author;
+	public Optional<String> getAuthor() {
+		return Optional.fromNullable(author);
 	}
 
 	@Override
@@ -244,8 +245,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getSubTitle() {
-		return subTitle;
+	public Optional<String> getSubtitle() {
+		return Optional.fromNullable(subTitle);
 	}
 
 	@Override
@@ -255,8 +256,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public Integer getPages() {
-		return pages;
+	public Optional<Integer> getPages() {
+		return Optional.fromNullable(pages);
 	}
 
 	@Override
@@ -271,8 +272,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getGiver() {
-		return giver;
+	public Optional<String> getGiver() {
+		return Optional.fromNullable(giver);
 	}
 
 	@Override
@@ -282,8 +283,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getLocation() {
-		return location;
+	public Optional<String> getLocation() {
+		return Optional.fromNullable(location);
 	}
 
 	@Override
@@ -296,8 +297,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	 * Returns a String containing the image location as a URL, or as a {@link BlobKey} keystring.
 	 */
 	@Override
-	public String getImageLocation() {
-		return image;
+	public Optional<String> getImageLocation() {
+		return Optional.fromNullable(image);
 	}
 
 	@Override
@@ -317,25 +318,25 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	}
 
 	@Override
-	public String getISBN10() {
-		return isbn_10;
+	public Optional<String> getISBN10() {
+		return Optional.fromNullable(isbn_10);
 	}
 
 	@Override
 	public Book setISBN10(String newISBN) {
-		checkArgument(newISBN == null || newISBN.length() == 10);
+		checkArgument(newISBN == null || newISBN.isEmpty() || newISBN.length() == 10);
 		this.isbn_10 = Strings.emptyToNull(newISBN);
 		return this;
 	}
 
 	@Override
-	public String getISBN13() {
-		return isbn_13;
+	public Optional<String> getISBN13() {
+		return Optional.fromNullable(isbn_13);
 	}
 
 	@Override
 	public Book setISBN13(String newISBN) {
-		checkArgument(newISBN == null || newISBN.length() == 13);
+		checkArgument(newISBN == null || newISBN.isEmpty() || newISBN.length() == 13);
 		this.isbn_13 = Strings.emptyToNull(newISBN);
 		return this;
 	}

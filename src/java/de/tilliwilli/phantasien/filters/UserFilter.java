@@ -44,7 +44,7 @@ public class UserFilter extends BaseHttpFilter {
 	 * The name of the session attribute that will hold the user object of the user currently logged
 	 * in.
 	 */
-	private static final String SESSION_ATTRIBUTE = "__USER";
+	public static final String SESSION_ATTRIBUTE = "__USER";
 
 	/**
 	 * The path-fragment that user paths start with.

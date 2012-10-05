@@ -1,7 +1,5 @@
 package de.tilliwilli.phantasien.model;
 
-import java.util.Collection;
-
 /**
  * Categories are <em>tags</em> a user can apply to books. Each category entity is owned by the user
  * who created it, and only that user can assign this category to his books.
@@ -14,7 +12,8 @@ public interface Category extends BaseEntity {
 	public User getUser();
 
 	/**
-	 * Returns the name of this category. Will never be <tt>null</tt> or empty.
+	 * Returns the name of this category. Will never be <tt>null</tt> or empty if the category was
+	 * persisted at least once.
 	 */
 	public String getName();
 
@@ -22,14 +21,9 @@ public interface Category extends BaseEntity {
 	 * Sets the name of this category to <tt>newName</tt> and returns the old name, if there was one.
 	 * 
 	 * @param newName
-	 *           the new name of this category
-	 * @return the old name if there was one, <tt>null</tt> otherwise
+	 *           the new name of this category, must not be <tt>null</tt> or empty
+	 * @return the old name
 	 */
 	public String setName(String newName);
 
-	/**
-	 * Returns all books that are labeled with this category. The returned collection is
-	 * <b>immutable</b> and might be empty.
-	 */
-	public Collection<Book> getBooks();
 }

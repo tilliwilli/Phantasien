@@ -2,7 +2,6 @@ package de.tilliwilli.phantasien.model;
 
 import com.google.common.base.Optional;
 
-
 /**
  * Simple DAO to retreive {@link User} objects by different means.
  */

@@ -1,11 +1,9 @@
 package de.tilliwilli.phantasien.model.ofy;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 import static com.googlecode.objectify.ObjectifyService.ofy;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 import com.google.common.base.Strings;
 import com.googlecode.objectify.Key;
@@ -15,7 +13,6 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
-import de.tilliwilli.phantasien.model.Book;
 import de.tilliwilli.phantasien.model.Category;
 import de.tilliwilli.phantasien.model.User;
 
@@ -80,6 +77,7 @@ class OfyCategory implements Category, OfyBaseEntity<OfyCategory> {
 
 	@Override
 	public void save() {
+		checkState(!Strings.isNullOrEmpty(name));
 		ofy().save().entity(this).now();
 	}
 
@@ -94,28 +92,15 @@ class OfyCategory implements Category, OfyBaseEntity<OfyCategory> {
 	}
 
 	@Override
-	public Collection<Book> getBooks() {
-		//@formatter:off
-		List<OfyBook> books = 
-				ofy().load()
-				.type(OfyBook.class)
-				.ancestor(owner)
-				.filter("categories", this)
-				.list();
-		//@formatter:on
-
-		return Collections.<Book>unmodifiableCollection(books);
-	}
-
-	@Override
 	public String getName() {
 		return name;
 	}
 
 	@Override
 	public String setName(String newName) {
-		String oldName = Strings.emptyToNull(name);
-		this.name = Strings.emptyToNull(newName);
+		checkArgument(!Strings.isNullOrEmpty(newName));
+		String oldName = name;
+		this.name = newName;
 		return oldName;
 	}
 }
