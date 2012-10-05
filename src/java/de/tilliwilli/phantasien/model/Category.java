@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.entities;
+package de.tilliwilli.phantasien.model;
 
 import java.util.Collection;
 

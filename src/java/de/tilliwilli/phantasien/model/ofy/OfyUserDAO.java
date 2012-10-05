@@ -1,18 +1,17 @@
-package de.tilliwilli.phantasien.model.dao.impl;
+package de.tilliwilli.phantasien.model.ofy;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.google.common.base.Strings;
 
-import de.tilliwilli.phantasien.model.dao.UserDAO;
-import de.tilliwilli.phantasien.model.entities.User;
-import de.tilliwilli.phantasien.model.entities.impl.OfyUser;
+import de.tilliwilli.phantasien.model.User;
+import de.tilliwilli.phantasien.model.UserDAO;
 
 /**
- * Onjectify-compliant implementation of a {@link UserDAO}.
+ * Objectify-compliant implementation of a {@link UserDAO}.
  */
-public class OfyUserDAO implements UserDAO {
+class OfyUserDAO implements UserDAO {
 
 	@Override
 	public User getUserById(String id) {

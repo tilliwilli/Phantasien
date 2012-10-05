@@ -1,9 +1,8 @@
-package de.tilliwilli.phantasien.model.entities;
+package de.tilliwilli.phantasien.model;
 
 import java.util.Collection;
 import java.util.Map;
 
-import de.tilliwilli.phantasien.model.ReadState;
 
 /**
  * A User is a single end-user of the application. Users manage {@link Book books}. They can define

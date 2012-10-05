@@ -10,7 +10,7 @@ import com.google.inject.Provider;
 import com.google.inject.servlet.RequestScoped;
 
 import de.tilliwilli.phantasien.filters.UserFilter;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.User;
 
 /**
  * Request-scoped provider for the {@link User} object of the current user. Depends on the current

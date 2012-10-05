@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.entities.impl;
+package de.tilliwilli.phantasien.model.ofy;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -15,16 +15,16 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Parent;
 
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.Category;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.Book;
+import de.tilliwilli.phantasien.model.Category;
+import de.tilliwilli.phantasien.model.User;
 
 /**
  * Objectify-compliant {@link Category} implementation.
  */
 @Entity
 @Cache
-public class OfyCategory implements Category, BaseOfyEntity<OfyCategory> {
+class OfyCategory implements Category, OfyBaseEntity<OfyCategory> {
 
 	/**
 	 * The owner of the category. This relation is final after creation, and is enforced in the

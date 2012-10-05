@@ -1,6 +1,5 @@
-package de.tilliwilli.phantasien.model.dao;
+package de.tilliwilli.phantasien.model;
 
-import de.tilliwilli.phantasien.model.entities.User;
 
 /**
  * Simple DAO to retreive {@link User} objects by different means.

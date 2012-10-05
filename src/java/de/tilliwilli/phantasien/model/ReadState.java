@@ -1,7 +1,5 @@
 package de.tilliwilli.phantasien.model;
 
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.User;
 
 /**
  * Different values of the ReadState enum define the kind of relation a {@link User} has towards a

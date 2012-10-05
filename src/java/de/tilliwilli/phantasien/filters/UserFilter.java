@@ -14,8 +14,8 @@ import com.google.appengine.api.users.UserService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import de.tilliwilli.phantasien.model.dao.UserDAO;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.User;
+import de.tilliwilli.phantasien.model.UserDAO;
 
 /**
  * <p>

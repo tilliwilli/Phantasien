@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.entities.impl;
+package de.tilliwilli.phantasien.model.ofy;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -19,17 +19,17 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Parent;
 
+import de.tilliwilli.phantasien.model.Book;
+import de.tilliwilli.phantasien.model.Category;
 import de.tilliwilli.phantasien.model.ReadState;
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.Category;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.User;
 
 /**
  * Objectify-compliant {@link Book} implementation.
  */
 @Entity
 @Cache
-public class OfyBook implements Book, BaseOfyEntity<OfyBook> {
+class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 
 	/**
 	 * The ID of this book in the datastore. Auto-generated.

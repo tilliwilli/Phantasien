@@ -5,14 +5,17 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
-import de.tilliwilli.phantasien.model.dao.UserDAO;
-import de.tilliwilli.phantasien.model.dao.impl.OfyUserDAO;
+import de.tilliwilli.phantasien.model.ofy.ObjectifyModule;
 
+/**
+ * An {@link AbstractModule} that sets up all bindings that are independent from Serlvet or LimeMVC
+ * contexts.
+ */
 public class BindingModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		bind(UserDAO.class).to(OfyUserDAO.class);
+		install(new ObjectifyModule());
 	}
 
 	@Provides

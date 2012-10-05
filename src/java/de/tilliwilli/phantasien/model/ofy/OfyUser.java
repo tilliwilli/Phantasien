@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.entities.impl;
+package de.tilliwilli.phantasien.model.ofy;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -17,16 +17,16 @@ import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-import de.tilliwilli.phantasien.model.entities.Book;
-import de.tilliwilli.phantasien.model.entities.Category;
-import de.tilliwilli.phantasien.model.entities.User;
+import de.tilliwilli.phantasien.model.Book;
+import de.tilliwilli.phantasien.model.Category;
+import de.tilliwilli.phantasien.model.User;
 
 /**
  * Objectify-compliant implementation of a {@link User}.
  */
 @Entity
 @Cache
-public class OfyUser implements User, BaseOfyEntity<OfyUser> {
+class OfyUser implements User, OfyBaseEntity<OfyUser> {
 
 	/**
 	 * The ID in the datastore. For Users, this is set to the ID of the

@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.model.entities;
+package de.tilliwilli.phantasien.model;
 
 /**
  * BaseEntity is an interface implemented by all entity types. It defines means to get a unique

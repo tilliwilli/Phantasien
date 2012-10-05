@@ -1,8 +1,7 @@
-package de.tilliwilli.phantasien.model.entities;
+package de.tilliwilli.phantasien.model;
 
 import java.util.Collection;
 
-import de.tilliwilli.phantasien.model.ReadState;
 
 /**
  * A Book is the central entity of this application. Books belong to {@link User Users}, and once a
