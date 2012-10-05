@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * Also provides dummy implementations for {@link #init} and {@link #destroy}.
  * 
  */
-public abstract class HttpFilterBase implements Filter {
+public abstract class BaseHttpFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {

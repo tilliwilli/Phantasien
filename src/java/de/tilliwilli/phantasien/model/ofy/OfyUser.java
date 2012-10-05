@@ -4,11 +4,9 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -17,8 +15,6 @@ import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-import de.tilliwilli.phantasien.model.Book;
-import de.tilliwilli.phantasien.model.Category;
 import de.tilliwilli.phantasien.model.User;
 
 /**
@@ -36,7 +32,12 @@ class OfyUser implements User, OfyBaseEntity<OfyUser> {
 	@Id
 	private String id;
 
-	private Map<String, String> settings = Maps.newHashMap();
+	private Map<String, Object> settings = Maps.newHashMap();
+
+	/**
+	 * Flag indicating that this user's profile should be publicly accessible.
+	 */
+	private boolean publicProfile;
 
 	/**
 	 * Private no-arg constructor for Objectify.
@@ -73,68 +74,33 @@ class OfyUser implements User, OfyBaseEntity<OfyUser> {
 	}
 
 	@Override
-	public String getSetting(String name) {
+	public Optional<Object> get(String name) {
 		checkArgument(!Strings.isNullOrEmpty(name));
-		return settings.get(name);
+		return Optional.fromNullable(settings.get(name));
 	}
 
 	@Override
-	public String setSetting(String name, String value) {
+	public User set(String name, Object value) {
 		checkArgument(!Strings.isNullOrEmpty(name));
-		return settings.put(name, value);
+		checkNotNull(value);
+		settings.put(name, value);
+		return this;
 	}
 
 	@Override
-	public Map<String, String> getAllSettings() {
+	public Map<String, Object> getAllSettings() {
 		return ImmutableMap.copyOf(settings);
 	}
 
 	@Override
-	public Book getBook(String id) {
-		checkNotNull(id);
-		Long idL = null;
-		try {
-			idL = Long.valueOf(id);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-		Key<OfyBook> key = Key.create(this.getKey(), OfyBook.class, idL);
-		return ofy().load().key(key).get();
+	public boolean isPublicProfile() {
+		return publicProfile;
 	}
 
 	@Override
-	public Collection<Book> getAllBooks() {
-		List<OfyBook> books = ofy().load().type(OfyBook.class).ancestor(this).list();
-		return Collections.<Book>unmodifiableCollection(books);
-	}
-
-	@Override
-	public Book createBook() {
-		return new OfyBook(this);
-	}
-
-	@Override
-	public Category getCategory(String id) {
-		checkNotNull(id);
-		Long idL = null;
-		try {
-			idL = Long.valueOf(id);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-		Key<OfyCategory> key = Key.create(this.getKey(), OfyCategory.class, idL);
-		return ofy().load().key(key).get();
-	}
-
-	@Override
-	public Collection<Category> getAllCategories() {
-		List<OfyCategory> cats = ofy().load().type(OfyCategory.class).ancestor(this).list();
-		return Collections.<Category>unmodifiableCollection(cats);
-	}
-
-	@Override
-	public Category createCategory() {
-		return new OfyCategory(this);
+	public User setPublicProfile(boolean publicProfile) {
+		this.publicProfile = publicProfile;
+		return this;
 	}
 
 }

@@ -20,7 +20,7 @@ import com.google.inject.Singleton;
  * {@link #DEFAULT_METHOD_PARAM}, which currently is <tt>_method</tt>.
  */
 @Singleton
-public class HiddenHttpMethodFilter extends HttpFilterBase {
+public class HiddenHttpMethodFilter extends BaseHttpFilter {
 
 	/**
 	 * The name to use as init parameter for the field name when setting up this filter.

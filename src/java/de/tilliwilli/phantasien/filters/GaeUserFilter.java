@@ -23,7 +23,7 @@ import com.google.inject.Singleton;
  * </p>
  */
 @Singleton
-public class GaeUserFilter extends HttpFilterBase {
+public class GaeUserFilter extends BaseHttpFilter {
 
 	/**
 	 * The GAE {@link UserService}.
