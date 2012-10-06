@@ -10,6 +10,6 @@ public interface UserDAO {
 	/**
 	 * Returns the {@link User} with the given <tt>id</tt>.
 	 */
-	public Optional<User> getById(String id);
+	public Optional<User> byId(String id);
 
 }

@@ -97,7 +97,7 @@ public class UserFilter extends BaseHttpFilter {
 			return;
 		}
 
-		Optional<User> requestedUser = userDao.getById(pathIdentifier.get());
+		Optional<User> requestedUser = userDao.byId(pathIdentifier.get());
 		if (!requestedUser.isPresent()) {
 			// invalid user profile was requested
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -133,6 +133,6 @@ public class UserFilter extends BaseHttpFilter {
 				"There must always be a GAE user. Make sure to invoke GaeUserFilter before UserFilter.");
 
 		String id = gaeUser.getUserId();
-		return userDao.getById(id);
+		return userDao.byId(id);
 	}
 }

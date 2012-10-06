@@ -18,7 +18,8 @@ import de.tilliwilli.phantasien.model.User;
 import de.tilliwilli.phantasien.providers.SessionUser;
 
 /**
- * Simple {@link ServletModule} that sets up all {@link Filter}s needed for our application.
+ * Simple {@link ServletModule} that sets up all {@link Filter}s needed for our application and
+ * bindings directly related to them.
  */
 public class FilterModule extends ServletModule {
 
@@ -46,8 +47,7 @@ public class FilterModule extends ServletModule {
 	@SessionUser
 	BookDAO provideSessionUserBookDAO(BookDAO bookDAO, HttpSession session) {
 		User user = (User) session.getAttribute(UserFilter.SESSION_ATTRIBUTE);
-		checkState(user != null,
-				"Can't inject @SessionUser BookDAO when the user is not registered in!");
+		checkState(user != null, "Can't inject @SessionUser BookDAO when the user is not logged in!");
 		bookDAO.setUser(user);
 		return bookDAO;
 	}

@@ -73,7 +73,7 @@ public interface Book extends BaseEntity {
 	public Book setTitle(String newTitle);
 
 	/**
-	 * Returns the subtitle of this book, or <tt>null</tt> if not set.
+	 * Returns the subtitle of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getSubtitle();
 
@@ -82,10 +82,10 @@ public interface Book extends BaseEntity {
 	 * 
 	 * @return this book for convenience
 	 */
-	public Book setSubTitle(String newSubTitle);
+	public Book setSubtitle(String newSubTitle);
 
 	/**
-	 * Returns the author of this book, or <tt>null</tt> if not set.
+	 * Returns the author of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getAuthor();
 
@@ -97,7 +97,7 @@ public interface Book extends BaseEntity {
 	public Book setAuthor(String newAuthor);
 
 	/**
-	 * Returns the number of pages in this book, or <b>-1</b> if not set.
+	 * Returns the number of pages in this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<Integer> getPages();
 
@@ -109,7 +109,7 @@ public interface Book extends BaseEntity {
 	public Book setPages(Integer numberOfPages);
 
 	/**
-	 * Returns the giver of this book, or <tt>null</tt> if not set.
+	 * Returns the giver of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getGiver();
 
@@ -121,7 +121,7 @@ public interface Book extends BaseEntity {
 	public Book setGiver(String giver);
 
 	/**
-	 * Returns the location of this book, or <tt>null</tt> if not set.
+	 * Returns the location of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getLocation();
 
@@ -139,7 +139,7 @@ public interface Book extends BaseEntity {
 	 * An image location can be either external or internal, determined when the location is set.
 	 * Whether the location is external can be queried with {@link #isExternalImage()}.
 	 * <p>
-	 * Returns <tt>null</tt> if the image location is not set.
+	 * Returns the location wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getImageLocation();
 
@@ -166,7 +166,7 @@ public interface Book extends BaseEntity {
 	public boolean isExternalImage();
 
 	/**
-	 * Returns the ISBN-<b>10</b> of this book, or <tt>null</tt> if not set.
+	 * Returns the ISBN-<b>10</b> of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getISBN10();
 
@@ -178,7 +178,7 @@ public interface Book extends BaseEntity {
 	public Book setISBN10(String newISBN);
 
 	/**
-	 * Returns the ISBN-<b>13</b> of this book, or <tt>null</tt> if not set.
+	 * Returns the ISBN-<b>13</b> of this book, wrapped in an {@link Optional}.
 	 */
 	public Optional<String> getISBN13();
 

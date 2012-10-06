@@ -2,6 +2,8 @@ package de.tilliwilli.phantasien.model;
 
 import java.util.Collection;
 
+import com.google.common.base.Optional;
+
 import de.tilliwilli.phantasien.providers.SessionUser;
 
 /**
@@ -11,13 +13,13 @@ import de.tilliwilli.phantasien.providers.SessionUser;
  * <p>
  * Since books always belong to a {@link User}, instead of supplying a user object with each method
  * call, you must give the user this DAO operates on with one call to {@link #setUser(User)}. If
- * that call is forgotten and any retrieval operation that explicitly needs a user throws an
- * {@link IllegalStateException} (the primary exception being methods that get {@link Category}
- * parameters, since these are bound to a user and the category's owner is used anyway).
+ * that call is forgotten any retrieval operation that explicitly needs a user throws an
+ * {@link IllegalStateException}. The primary exception are methods that get {@link Category}
+ * parameters, since these are bound to a user and the category's owner is used anyway.
  * </p>
  * <p>
- * An alternative is to annotate the BookDAO with {@link SessionUser @SessionUser}, so it
- * automatically gets the user from the session injected.
+ * An alternative is to annotate the BookDAO instance with {@link SessionUser @SessionUser}, so it
+ * automatically gets the user injected from the session.
  */
 public interface BookDAO {
 
@@ -29,9 +31,10 @@ public interface BookDAO {
 	/**
 	 * Returns the book with the given <tt>id</tt>.
 	 * 
-	 * @return the book object
+	 * @return an {@link Optional} containing the book object or nothing if there is no book with the
+	 *         given <tt>id</tt>
 	 */
-	public Book byId(String id);
+	public Optional<Book> byId(String id);
 
 	/**
 	 * Returns all books that belong to the given category.

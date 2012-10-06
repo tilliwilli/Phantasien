@@ -63,7 +63,7 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	/**
 	 * The subtitle of the book.
 	 */
-	private String subTitle;
+	private String subtitle;
 
 	/**
 	 * Te book author.
@@ -148,9 +148,7 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 
 	@Override
 	public String getId() {
-		if (id == null) {
-			return null;
-		}
+		if (id == null) { return null; }
 		return id.toString();
 	}
 
@@ -246,12 +244,12 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 
 	@Override
 	public Optional<String> getSubtitle() {
-		return Optional.fromNullable(subTitle);
+		return Optional.fromNullable(subtitle);
 	}
 
 	@Override
-	public Book setSubTitle(String newSubTitle) {
-		this.subTitle = Strings.emptyToNull(newSubTitle);
+	public Book setSubtitle(String newSubTitle) {
+		this.subtitle = Strings.emptyToNull(newSubTitle);
 		return this;
 	}
 
@@ -262,12 +260,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 
 	@Override
 	public Book setPages(Integer numberOfPages) {
-		if (numberOfPages == null) {
-			this.pages = null;
-		} else {
-			checkArgument(numberOfPages > 0);
-			this.pages = numberOfPages;
-		}
+		checkArgument(numberOfPages > 0);
+		this.pages = numberOfPages;
 		return this;
 	}
 

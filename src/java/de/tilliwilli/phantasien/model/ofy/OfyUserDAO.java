@@ -15,7 +15,7 @@ import de.tilliwilli.phantasien.model.UserDAO;
 class OfyUserDAO implements UserDAO {
 
 	@Override
-	public Optional<User> getById(String id) {
+	public Optional<User> byId(String id) {
 		checkArgument(!Strings.isNullOrEmpty(id));
 		return Optional.<User>fromNullable(ofy().load().type(OfyUser.class).id(id).get());
 	}
