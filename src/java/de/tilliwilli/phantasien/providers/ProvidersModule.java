@@ -7,13 +7,14 @@ import javax.servlet.http.HttpSession;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
+import de.tilliwilli.phantasien.app.Constants;
 import de.tilliwilli.phantasien.filters.UserFilter;
 import de.tilliwilli.phantasien.model.BookDAO;
 import de.tilliwilli.phantasien.model.CategoryDAO;
 import de.tilliwilli.phantasien.model.User;
 import de.tilliwilli.phantasien.providers.annotations.FromSession;
 
-public class ProvidersModule extends AbstractModule {
+public class ProvidersModule extends AbstractModule implements Constants {
 
 	@Override
 	protected void configure() {}
@@ -25,7 +26,7 @@ public class ProvidersModule extends AbstractModule {
 	@Provides
 	@FromSession
 	BookDAO provideSessionUserBookDAO(BookDAO bookDAO, HttpSession session) {
-		User user = (User) session.getAttribute(UserFilter.SESSION_ATTRIBUTE);
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE);
 		checkState(user != null,
 				"Can't inject session user into BookDAO when the user is not logged in!");
 		bookDAO.setUser(user);
@@ -39,7 +40,7 @@ public class ProvidersModule extends AbstractModule {
 	@Provides
 	@FromSession
 	CategoryDAO provideSessionUserCategoryDAO(CategoryDAO catDAO, HttpSession session) {
-		User user = (User) session.getAttribute(UserFilter.SESSION_ATTRIBUTE);
+		User user = (User) session.getAttribute(USER_SESSION_ATTRIBUTE);
 		checkState(user != null,
 				"Can't inject session user into CategoryDAO when the user is not logged in!");
 		catDAO.setUser(user);

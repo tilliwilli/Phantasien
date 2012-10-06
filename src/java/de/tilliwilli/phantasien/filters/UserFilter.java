@@ -15,6 +15,7 @@ import com.google.common.base.Optional;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+import de.tilliwilli.phantasien.app.Constants;
 import de.tilliwilli.phantasien.model.User;
 import de.tilliwilli.phantasien.model.UserDAO;
 
@@ -28,9 +29,9 @@ import de.tilliwilli.phantasien.model.UserDAO;
  * {@link GaeUserFilter} before applying this filter!<br>
  * </p>
  * <p>
- * If there is a profile in the data store, the filter retrieves it, puts it into the sesseion and
+ * If there is a profile in the data store, the filter retrieves it, puts it into the session and
  * calls the filter chain. The name of the request attribute is the value of
- * {@link #SESSION_ATTRIBUTE} (currently " <tt>__USER</tt>").
+ * {@link #USER_SESSION_ATTRIBUTE} (currently " <tt>__USER</tt>").
  * </p>
  * <p>
  * If there is no profile yet, the filter forwards the user to a registering controller. After
@@ -38,18 +39,7 @@ import de.tilliwilli.phantasien.model.UserDAO;
  * </p>
  */
 @Singleton
-public class UserFilter extends BaseHttpFilter {
-
-	/**
-	 * The name of the session attribute that will hold the user object of the user currently logged
-	 * in.
-	 */
-	public static final String SESSION_ATTRIBUTE = "__USER";
-
-	/**
-	 * The path-fragment that user paths start with.
-	 */
-	public static final String USER_PATH = "/user/";
+public class UserFilter extends BaseHttpFilter implements Constants {
 
 	/**
 	 * The GAE {@link UserService} for retrieval of the GAE user.
@@ -72,7 +62,7 @@ public class UserFilter extends BaseHttpFilter {
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpSession session = request.getSession();
-		User sessionUser = (User) session.getAttribute(SESSION_ATTRIBUTE);
+		User sessionUser = (User) session.getAttribute(USER_SESSION_ATTRIBUTE);
 
 		if (sessionUser != null) {
 			// user has a profile in the datastore that is already in the session
@@ -83,7 +73,7 @@ public class UserFilter extends BaseHttpFilter {
 		Optional<User> user = getUserFromDAO();
 		if (user.isPresent()) {
 			// user has a profile in the datastore, so put it into session and go on
-			session.setAttribute(SESSION_ATTRIBUTE, user.get());
+			session.setAttribute(USER_SESSION_ATTRIBUTE, user.get());
 			chain.doFilter(request, response);
 			return;
 		}
