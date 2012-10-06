@@ -8,6 +8,7 @@ import com.google.inject.servlet.GuiceServletContextListener;
 import de.tilliwilli.phantasien.app.modules.BindingModule;
 import de.tilliwilli.phantasien.app.modules.ControllerModule;
 import de.tilliwilli.phantasien.app.modules.FilterModule;
+import de.tilliwilli.phantasien.providers.ProvidersModule;
 
 /**
  * The {@link GuiceServletContextListener} that bootstraps all our {@link Module}s for dependency
@@ -21,7 +22,8 @@ public class PhantasienServletContextListener extends GuiceServletContextListene
 		return Guice.createInjector(
 				new BindingModule(),
 				new FilterModule(),
-				new ControllerModule()
+				new ControllerModule(),
+				new ProvidersModule()
 		);
 		//@formatter:on
 	}

@@ -10,8 +10,14 @@ import de.tilliwilli.phantasien.model.Category;
 import de.tilliwilli.phantasien.model.CategoryDAO;
 import de.tilliwilli.phantasien.model.User;
 
+/**
+ * Objectify-compliant implementation of {@link CategoryDAO}.
+ */
 public class OfyCategoryDAO implements CategoryDAO {
 
+	/**
+	 * The user this DAO operates on.
+	 */
 	private OfyUser user;
 
 	@Override

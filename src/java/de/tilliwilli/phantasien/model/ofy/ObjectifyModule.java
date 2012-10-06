@@ -5,6 +5,7 @@ import com.google.inject.Module;
 import com.googlecode.objectify.annotation.Entity;
 
 import de.tilliwilli.phantasien.model.BookDAO;
+import de.tilliwilli.phantasien.model.CategoryDAO;
 import de.tilliwilli.phantasien.model.UserDAO;
 
 /**
@@ -18,5 +19,6 @@ public class ObjectifyModule extends AbstractModule {
 		ObjectifyRegisterer.registerEntities();
 		bind(UserDAO.class).to(OfyUserDAO.class);
 		bind(BookDAO.class).to(OfyBookDAO.class);
+		bind(CategoryDAO.class).to(OfyCategoryDAO.class);
 	}
 }

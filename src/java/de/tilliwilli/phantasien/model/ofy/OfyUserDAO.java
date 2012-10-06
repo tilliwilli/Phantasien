@@ -10,7 +10,7 @@ import de.tilliwilli.phantasien.model.User;
 import de.tilliwilli.phantasien.model.UserDAO;
 
 /**
- * Objectify-compliant implementation of a {@link UserDAO}.
+ * Objectify-compliant implementation of {@link UserDAO}.
  */
 class OfyUserDAO implements UserDAO {
 

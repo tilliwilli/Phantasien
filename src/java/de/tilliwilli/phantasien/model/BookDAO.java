@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.google.common.base.Optional;
 
-import de.tilliwilli.phantasien.providers.SessionUser;
+import de.tilliwilli.phantasien.providers.annotations.FromSession;
 
 /**
  * <p>
@@ -18,7 +18,7 @@ import de.tilliwilli.phantasien.providers.SessionUser;
  * parameters, since these are bound to a user and the category's owner is used anyway.
  * </p>
  * <p>
- * An alternative is to annotate the BookDAO instance with {@link SessionUser @SessionUser}, so it
+ * An alternative is to annotate the BookDAO instance with {@link FromSession @SessionUser}, so it
  * automatically gets the user injected from the session.
  */
 public interface BookDAO {

@@ -22,8 +22,14 @@ import de.tilliwilli.phantasien.model.Category;
 import de.tilliwilli.phantasien.model.ReadState;
 import de.tilliwilli.phantasien.model.User;
 
+/**
+ * Objectify-compliant implementation of {@link BookDAO}.
+ */
 class OfyBookDAO implements BookDAO {
 
+	/**
+	 * The user this DAO operates on.
+	 */
 	private OfyUser user;
 
 	@Override
