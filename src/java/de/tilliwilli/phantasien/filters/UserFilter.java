@@ -61,17 +61,23 @@ public class UserFilter extends BaseHttpFilter implements Constants {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-		HttpSession session = request.getSession();
-		User sessionUser = (User) session.getAttribute(USER_SESSION_ATTRIBUTE);
+		String uri = request.getRequestURI();
+		if(uri.startsWith("/_ah") || uri.startsWith("/register") || uri.startsWith("/test")) {
+			chain.doFilter(request, response);
+			return;
+		}
 
-		if (sessionUser != null) {
+		HttpSession session = request.getSession();
+		User sessionUser = (User)session.getAttribute(USER_SESSION_ATTRIBUTE);
+
+		if(sessionUser != null) {
 			// user has a profile in the datastore that is already in the session
 			chain.doFilter(request, response);
 			return;
 		}
 
 		Optional<User> user = getUserFromDAO();
-		if (user.isPresent()) {
+		if(user.isPresent()) {
 			// user has a profile in the datastore, so put it into session and go on
 			session.setAttribute(USER_SESSION_ATTRIBUTE, user.get());
 			chain.doFilter(request, response);
@@ -81,18 +87,18 @@ public class UserFilter extends BaseHttpFilter implements Constants {
 		// user has no profile now
 
 		Optional<String> pathIdentifier = getIdentifierFromPath(request.getRequestURI());
-		if (!pathIdentifier.isPresent()) {
+		if(!pathIdentifier.isPresent()) {
 			// user has to be registered to access anything outside of "/user"
 			response.sendRedirect("/register");
 			return;
 		}
 
 		Optional<User> requestedUser = userDao.byId(pathIdentifier.get());
-		if (!requestedUser.isPresent()) {
+		if(!requestedUser.isPresent()) {
 			// invalid user profile was requested
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			return;
-		} else if (!requestedUser.get().isPublicProfile()) {
+		} else if(!requestedUser.get().isPublicProfile()) {
 			// requested profile is private
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 			return;
@@ -103,14 +109,14 @@ public class UserFilter extends BaseHttpFilter implements Constants {
 	}
 
 	private Optional<String> getIdentifierFromPath(String uri) {
-		if (uri.startsWith(USER_PATH)) {
+		if(uri.startsWith(USER_PATH)) {
 			int start = USER_PATH.length();
 			int end = uri.indexOf('/', start);
-			if (end == -1) {
+			if(end == -1) {
 				// when there is no trailing '/' use the whole tail
 				end = uri.length();
 			}
-			if (start < end && end <= uri.length()) {
+			if(start < end && end <= uri.length()) {
 				return Optional.of(uri.substring(start, end));
 			}
 		}

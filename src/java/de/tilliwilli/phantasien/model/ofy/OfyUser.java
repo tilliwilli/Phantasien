@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
+import com.googlecode.objectify.annotation.EmbedMap;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -32,6 +33,7 @@ class OfyUser implements User, OfyBaseEntity<OfyUser> {
 	@Id
 	private String id;
 
+	@EmbedMap
 	private Map<String, Object> settings = Maps.newHashMap();
 
 	/**

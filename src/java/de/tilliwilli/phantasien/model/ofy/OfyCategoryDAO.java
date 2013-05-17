@@ -30,7 +30,7 @@ public class OfyCategoryDAO implements CategoryDAO {
 	public Optional<Category> byId(String id) {
 		checkUser();
 		Long idL = Long.parseLong(id);
-		Category category = ofy().load().type(OfyCategory.class).parent(user).id(idL).get();
+		Category category = ofy().load().type(OfyCategory.class).parent(user).id(idL).now();
 		return Optional.fromNullable(category);
 	}
 

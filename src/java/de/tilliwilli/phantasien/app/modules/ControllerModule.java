@@ -3,7 +3,7 @@ package de.tilliwilli.phantasien.app.modules;
 import org.zdevra.guice.mvc.MvcModule;
 import org.zdevra.guice.mvc.annotations.Controller;
 
-import de.tilliwilli.phantasien.controllers.UserForwardingServlet;
+import de.tilliwilli.phantasien.controllers.TestController;
 
 /**
  * {@link MvcModule} that sets up all our {@link Controller controllers} for request processing and
@@ -15,6 +15,8 @@ public class ControllerModule extends MvcModule {
 	protected void configureControllers() {
 
 		// forward all other requests to the appropriate version under /user
-		serve("/*").with(UserForwardingServlet.class);
+		//serve("/*").with(UserForwardingServlet.class);
+		control("/test/*").withController(TestController.class);
+
 	}
 }

@@ -17,6 +17,6 @@ class OfyUserDAO implements UserDAO {
 	@Override
 	public Optional<User> byId(String id) {
 		checkArgument(!Strings.isNullOrEmpty(id));
-		return Optional.<User>fromNullable(ofy().load().type(OfyUser.class).id(id).get());
+		return Optional.<User>fromNullable(ofy().load().type(OfyUser.class).id(id).now());
 	}
 }

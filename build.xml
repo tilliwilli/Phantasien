@@ -13,7 +13,22 @@
 		</fileset>
 	</path>-->
 
-	<target name="copy_webcontent" description="Synchronizes the web content source folder with the target war folder.">
+	<target name="copy.gae.jars">
+		<copy todir="war/WEB-INF/lib">
+			<fileset dir="${gae.sdk.dir}/lib/user">
+				<include name="*" />
+			</fileset>
+			<fileset dir="${gae.sdk.dir}/lib/opt/user/appengine-endpoints/v1">
+				<include name="*" />
+			</fileset>
+			<firstmatchmapper>
+				<globmapper from="appengine-api-labs-*.jar" to="appengine-api-labs.jar" />
+				<identitymapper/>
+			</firstmatchmapper>
+		</copy>
+	</target>
+	
+	<target name="copy.webcontent" description="Synchronizes the web content source folder with the target war folder.">
 		<sync todir="war">
 			<fileset dir="src/webapp" />
 			<preserveintarget>

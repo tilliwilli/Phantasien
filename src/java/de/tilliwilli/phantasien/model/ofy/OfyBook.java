@@ -45,7 +45,7 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	private Ref<OfyUser> user;
 
 	/**
-	 * The {@link Set} of {@link OfyCategory categories} that are assigned to this book.<br>
+	 * The {@link Set} of {@link OfyCategory categories} that are assigned to this book.
 	 */
 	@Index
 	private Set<Ref<OfyCategory>> categories = Sets.newHashSet();
@@ -123,7 +123,8 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 	 */
 	OfyBook(OfyUser owner) {
 		checkNotNull(owner);
-		this.user = Ref.create(owner.getKey(), owner);
+		this.user = Ref.create(owner.getKey());
+
 	}
 
 	/**
@@ -148,7 +149,9 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 
 	@Override
 	public String getId() {
-		if (id == null) { return null; }
+		if (id == null) {
+			return null;
+		}
 		return id.toString();
 	}
 
@@ -182,7 +185,7 @@ class OfyBook implements Book, OfyBaseEntity<OfyBook> {
 		// check that the given category belongs to the same user as we do
 		checkArgument(catImpl.getUser().equals(this.getUser()));
 
-		categories.add(Ref.create(catImpl.getKey(), catImpl));
+		categories.add(Ref.create(catImpl.getKey()));
 		return this;
 	}
 

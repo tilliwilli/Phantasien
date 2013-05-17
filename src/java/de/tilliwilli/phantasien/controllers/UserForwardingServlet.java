@@ -4,6 +4,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.IOException;
 
+import javax.inject.Singleton;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,12 @@ import de.tilliwilli.phantasien.model.User;
  * <p>
  * get forwarded to
  * <p>
- * <tt>/users/&lt;user-id&gt;/categories/123456/edit</tt>.
+ * <tt>/user/&lt;user-id&gt;/categories/123456/edit</tt>.
  * <p>
  * Assumes that {@link UserFilter} is correctly set up for retrieval of the current user from the
  * session.
  */
+@Singleton
 public class UserForwardingServlet extends HttpServlet implements Constants {
 
 	private static final long serialVersionUID = -5508519567687835856L;

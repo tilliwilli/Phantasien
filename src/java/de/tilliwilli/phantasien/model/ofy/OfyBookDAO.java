@@ -42,7 +42,7 @@ class OfyBookDAO implements BookDAO {
 	public Optional<Book> byId(String id) {
 		checkUser();
 		Long idL = Long.parseLong(id);
-		Book book = book().parent(user).id(idL).get();
+		Book book = book().parent(user).id(idL).now();
 		return Optional.fromNullable(book);
 	}
 

@@ -54,7 +54,7 @@ class OfyCategory implements Category, OfyBaseEntity<OfyCategory> {
 	 */
 	OfyCategory(OfyUser owner) {
 		checkNotNull(owner);
-		this.owner = Ref.create(owner.getKey(), owner);
+		this.owner = Ref.create(owner.getKey());
 	}
 
 	OfyCategory(Key<OfyUser> ownerKey) {

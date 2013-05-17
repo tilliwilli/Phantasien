@@ -2,6 +2,7 @@ package de.tilliwilli.phantasien.app.modules;
 
 import javax.servlet.Filter;
 
+import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 
@@ -18,10 +19,12 @@ public class FilterModule extends ServletModule {
 
 	@Override
 	protected void configureServlets() {
+
 		// CharacterEncodingFilter defaults to use UTF-8, which is what we want
 		filter("/*").through(CharacterEncodingFilter.class);
 
 		// automatically clean up the ObjectifyService after usage
+		bind(ObjectifyFilter.class).in(Scopes.SINGLETON);
 		filter("/*").through(ObjectifyFilter.class);
 
 		// make sure to filter through GaeUserFilter _before_ UserFilter
