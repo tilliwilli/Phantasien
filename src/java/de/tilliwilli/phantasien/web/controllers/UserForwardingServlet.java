@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.controllers;
+package de.tilliwilli.phantasien.web.controllers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.common.base.Strings;
 
 import de.tilliwilli.phantasien.app.Constants;
-import de.tilliwilli.phantasien.filters.UserFilter;
 import de.tilliwilli.phantasien.model.User;
+import de.tilliwilli.phantasien.web.filters.UserFilter;
 
 /**
  * Simple servlet that forwards all requests specific to the user to his own profile page.

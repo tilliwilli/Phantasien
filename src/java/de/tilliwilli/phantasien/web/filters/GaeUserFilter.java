@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.filters;
+package de.tilliwilli.phantasien.web.filters;
 
 import java.io.IOException;
 

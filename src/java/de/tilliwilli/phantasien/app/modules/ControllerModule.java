@@ -3,7 +3,7 @@ package de.tilliwilli.phantasien.app.modules;
 import org.zdevra.guice.mvc.MvcModule;
 import org.zdevra.guice.mvc.annotations.Controller;
 
-import de.tilliwilli.phantasien.controllers.TestController;
+import de.tilliwilli.phantasien.web.controllers.TestController;
 
 /**
  * {@link MvcModule} that sets up all our {@link Controller controllers} for request processing and

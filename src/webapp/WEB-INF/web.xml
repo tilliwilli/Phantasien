@@ -3,21 +3,43 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<!-- Guice filter for injection of Requests, Responses, ServletContexts etc. -->
-	<filter>
-		<filter-name>guice-filter</filter-name>
-		<filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>guice-filter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
 
-	<!--	Our ServletContextListener, used for bootstrapping the Guice modules, and so needed for
-			all other filters/servlets/controllers and everything to inject -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>de.tilliwilli.phantasien</param-value>
+	</context-param>
+
 	<listener>
-		<listener-class>de.tilliwilli.phantasien.app.PhantasienServletContextListener</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	  <!-- Declare a Spring MVC DispatcherServlet as usual -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <!-- Configure DispatcherServlet to use AnnotationConfigWebApplicationContext
+           instead of the default XmlWebApplicationContext -->
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+      <!-- Again, config locations must consist of one or more comma- or space-delimited
+           and fully-qualified @Configuration classes -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>de.tilliwilli.phantasien.controllers</param-value>
+		</init-param>
+	</servlet>
+
+  <!-- map all requests for /app/* to the dispatcher servlet -->
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
 
 	<!--	Although almost everything should be processed within our ContextListener, security setup for GAE
 			is most easily done with <security-constraint>s here, and Guice Servlets don't support setting

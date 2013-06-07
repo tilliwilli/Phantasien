@@ -25,7 +25,7 @@
 		
 		<!-- Freemarker as a templating engine more suitable for strict MVC pattern -->
 <!-- 		<dependency org="org.freemarker" name="freemarker" rev="2.3.19" /> -->
-		<dependency org="org.freemarker" name="freemarker-gae" rev="2.3.19" />
+		<!-- <dependency org="org.freemarker" name="freemarker-gae" rev="2.3.19" /> -->
 
 		<!-- logging framework -->
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.5" />
@@ -37,17 +37,19 @@
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="2.0.1" />
 		
 		<!-- Guice for dependency injection -->
-		<dependency org="com.google.inject" name="guice" rev="3.0" />
+		<!-- <dependency org="com.google.inject" name="guice" rev="3.0" /> -->
 		
 		<!-- Lime MVC as a stripped-down version of Spring MVC esp. made for Guice -->
-		<dependency org="org.zdevra" name="lime" rev="0.4.2" />
-		<dependency org="org.zdevra" name="lime-freemarker" rev="0.4.2" />
+		<!-- <dependency org="org.zdevra" name="lime" rev="0.4.2" />
+		<dependency org="org.zdevra" name="lime-freemarker" rev="0.4.2" /> -->
 		
 		<!-- Objectify as a simple abstraction of the datastore API -->
 		<dependency org="com.googlecode.objectify" name="objectify" rev="4.0rc1">
 			<exclude org="com.google.appengine" name="appengine-api-1.0-sdk"/>
 			<exclude org="com.google.appengine" name="appengine-api-labs"/>
 		</dependency>
+		
+		<dependency org="org.springframework" name="spring-webmvc" rev="3.2.3.RELEASE" />
 
 	</dependencies>
 </ivy-module>

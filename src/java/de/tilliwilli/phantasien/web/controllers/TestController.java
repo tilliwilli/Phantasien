@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.controllers;
+package de.tilliwilli.phantasien.web.controllers;
 
 import org.zdevra.guice.mvc.ModelMap;
 import org.zdevra.guice.mvc.annotations.Controller;

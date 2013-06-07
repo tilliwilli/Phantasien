@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.filters;
+package de.tilliwilli.phantasien.web.filters;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -62,7 +62,7 @@ public class UserFilter extends BaseHttpFilter implements Constants {
 			FilterChain chain) throws IOException, ServletException {
 
 		String uri = request.getRequestURI();
-		if (uri.startsWith("/_ah") || uri.startsWith("/register") || uri.startsWith("/test")) {
+		if (uri.startsWith("/_ah") || uri.startsWith("/register")) {
 			chain.doFilter(request, response);
 			return;
 		}

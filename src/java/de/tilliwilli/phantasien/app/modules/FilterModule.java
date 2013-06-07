@@ -6,10 +6,10 @@ import com.google.inject.Scopes;
 import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 
-import de.tilliwilli.phantasien.filters.CharacterEncodingFilter;
-import de.tilliwilli.phantasien.filters.GaeUserFilter;
-import de.tilliwilli.phantasien.filters.HiddenHttpMethodFilter;
-import de.tilliwilli.phantasien.filters.UserFilter;
+import de.tilliwilli.phantasien.web.filters.CharacterEncodingFilter;
+import de.tilliwilli.phantasien.web.filters.GaeUserFilter;
+import de.tilliwilli.phantasien.web.filters.HiddenHttpMethodFilter;
+import de.tilliwilli.phantasien.web.filters.UserFilter;
 
 /**
  * Simple {@link ServletModule} that sets up all {@link Filter}s needed for our application and
