@@ -10,7 +10,7 @@ import org.zdevra.guice.mvc.annotations.View;
 public class TestController {
 
 	@Path("/hello/(.*)")
-	@View("WEB-INF/jsp/hello.jsp")
+	@View("hello")
 	public ModelMap doAction(@UriParameter(1) String name) {
 		ModelMap m = new ModelMap();
 		m.put("name", name);

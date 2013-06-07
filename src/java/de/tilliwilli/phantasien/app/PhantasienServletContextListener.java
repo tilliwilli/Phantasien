@@ -4,10 +4,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.servlet.GuiceServletContextListener;
+import com.google.inject.util.Modules;
 
 import de.tilliwilli.phantasien.app.modules.BindingModule;
 import de.tilliwilli.phantasien.app.modules.ControllerModule;
 import de.tilliwilli.phantasien.app.modules.FilterModule;
+import de.tilliwilli.phantasien.app.modules.LimeFixingModule;
 import de.tilliwilli.phantasien.providers.ProvidersModule;
 
 /**
@@ -19,11 +21,15 @@ public class PhantasienServletContextListener extends GuiceServletContextListene
 	@Override
 	protected Injector getInjector() {
 		//@formatter:off
-		return Guice.createInjector(
+		Module allModules = Modules.combine(
 				new BindingModule(),
 				new FilterModule(),
 				new ControllerModule(),
 				new ProvidersModule()
+		);
+		
+		return Guice.createInjector(
+			Modules.override(allModules).with(new LimeFixingModule())
 		);
 		//@formatter:on
 	}

@@ -1,6 +1,5 @@
 package de.tilliwilli.phantasien.app;
 
-
 public interface Constants {
 
 	/**

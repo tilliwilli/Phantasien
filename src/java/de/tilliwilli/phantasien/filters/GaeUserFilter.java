@@ -38,10 +38,10 @@ public class GaeUserFilter extends BaseHttpFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		if(!userService.isUserLoggedIn() && !request.getRequestURI().startsWith("/_ah")) {
+		if (!userService.isUserLoggedIn() && !request.getRequestURI().startsWith("/_ah")) {
 			StringBuffer url = request.getRequestURL();
 			String queryString = Strings.nullToEmpty(request.getQueryString());
-			if(!queryString.isEmpty()) {
+			if (!queryString.isEmpty()) {
 				url.append('?');
 				url.append(queryString);
 			}

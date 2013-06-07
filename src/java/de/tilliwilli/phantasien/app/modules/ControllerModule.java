@@ -17,6 +17,5 @@ public class ControllerModule extends MvcModule {
 		// forward all other requests to the appropriate version under /user
 		//serve("/*").with(UserForwardingServlet.class);
 		control("/test/*").withController(TestController.class);
-
 	}
 }

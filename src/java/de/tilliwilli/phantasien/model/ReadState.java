@@ -1,6 +1,5 @@
 package de.tilliwilli.phantasien.model;
 
-
 /**
  * Different values of the ReadState enum define the kind of relation a {@link User} has towards a
  * {@link Book}.<br>
