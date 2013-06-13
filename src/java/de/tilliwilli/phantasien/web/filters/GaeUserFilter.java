@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.filters;
+package de.tilliwilli.phantasien.web.filters;
 
 import java.io.IOException;
 
@@ -39,13 +39,13 @@ public class GaeUserFilter extends BaseHttpFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		if (!userService.isUserLoggedIn() && !request.getRequestURI().startsWith("/_ah")) {
-			StringBuffer url = request.getRequestURL();
+			String uri = request.getRequestURI();
 			String queryString = Strings.nullToEmpty(request.getQueryString());
 			if (!queryString.isEmpty()) {
-				url.append('?');
-				url.append(queryString);
+				uri += '?';
+				uri += queryString;
 			}
-			String loginURL = userService.createLoginURL(url.toString());
+			String loginURL = userService.createLoginURL(uri);
 			response.sendRedirect(loginURL);
 		} else {
 			chain.doFilter(request, response);

@@ -11,11 +11,13 @@
 	<configurations defaultconf="default"/>
 	<dependencies>
 		<!-- Google App Engine dependencies -->
-		<!-- <dependency org="com.google.appengine" name="appengine-api-1.0-sdk" rev="&appengine.version;" />
+		<!--
+		<dependency org="com.google.appengine" name="appengine-api-1.0-sdk" rev="&appengine.version;" />
 		<dependency org="com.google.appengine" name="appengine-api-labs" rev="&appengine.version;" />
  		<dependency org="com.google.appengine" name="appengine-endpoints" rev="&appengine.version;" />
 		<dependency org="com.google.appengine" name="appengine-jsr107cache" rev="&appengine.version;" />
-		<dependency org="net.sf.jsr107cache" name="jsr107cache" rev="1.1" /> -->
+		<dependency org="net.sf.jsr107cache" name="jsr107cache" rev="1.1" />
+		-->
 
 		<!-- Servlet- and JSP-API, JSTL, EL -->
 		<dependency org="javax.servlet" name="servlet-api" rev="2.4" />
@@ -23,9 +25,22 @@
 		<dependency org="javax.servlet" name="jstl" rev="1.2" />
 		<dependency org="javax.el" name="javax.el-api" rev="2.2.4" />
 		
-		<!-- Freemarker as a templating engine more suitable for strict MVC pattern -->
-<!-- 		<dependency org="org.freemarker" name="freemarker" rev="2.3.19" /> -->
-		<dependency org="org.freemarker" name="freemarker-gae" rev="2.3.19" />
+		<dependency org="org.restlet.gae" name="org.restlet" rev="2.1.2" />
+		<dependency org="org.restlet.gae" name="org.restlet.ext.servlet" rev="2.1.2" />
+		<dependency org="org.restlet.gae" name="org.restlet.ext.gae" rev="2.1.2">
+			<exclude org="com.google.appengine" name="appengine-api-1.0-sdk"/>
+		</dependency>
+		<dependency org="org.restlet.gae" name="org.restlet.ext.freemarker" rev="2.1.2" />
+		
+		<!-- Guice for dependency injection -->
+		<dependency org="com.google.inject" name="guice" rev="3.0" />
+		<dependency org="com.google.inject.extensions" name="guice-servlet" rev="3.0" />
+
+		<!-- Objectify as a simple abstraction of the datastore API -->
+		<dependency org="com.googlecode.objectify" name="objectify" rev="4.0rc1">
+			<exclude org="com.google.appengine" name="appengine-api-1.0-sdk"/>
+			<exclude org="com.google.appengine" name="appengine-api-labs"/>
+		</dependency>
 
 		<!-- logging framework -->
 		<dependency org="org.slf4j" name="slf4j-api" rev="1.7.5" />
@@ -33,21 +48,9 @@
 
 		<!-- Guava as a general-purpose language enhancement library -->
 		<dependency org="com.google.guava" name="guava" rev="14.0.1" />
+
 		<!-- JSR-305 for @Nullable annotation -->
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="2.0.1" />
-		
-		<!-- Guice for dependency injection -->
-		<dependency org="com.google.inject" name="guice" rev="3.0" />
-		
-		<!-- Lime MVC as a stripped-down version of Spring MVC esp. made for Guice -->
-		<dependency org="org.zdevra" name="lime" rev="0.4.2" />
-		<dependency org="org.zdevra" name="lime-freemarker" rev="0.4.2" />
-		
-		<!-- Objectify as a simple abstraction of the datastore API -->
-		<dependency org="com.googlecode.objectify" name="objectify" rev="4.0rc1">
-			<exclude org="com.google.appengine" name="appengine-api-1.0-sdk"/>
-			<exclude org="com.google.appengine" name="appengine-api-labs"/>
-		</dependency>
 
 	</dependencies>
 </ivy-module>

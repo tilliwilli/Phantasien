@@ -1,4 +1,4 @@
-package de.tilliwilli.phantasien.providers;
+package de.tilliwilli.phantasien.app.providers;
 
 import static com.google.common.base.Preconditions.checkState;
 
@@ -8,11 +8,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
 import de.tilliwilli.phantasien.app.Constants;
-import de.tilliwilli.phantasien.filters.UserFilter;
+import de.tilliwilli.phantasien.app.providers.annotations.FromSession;
 import de.tilliwilli.phantasien.model.BookDAO;
 import de.tilliwilli.phantasien.model.CategoryDAO;
 import de.tilliwilli.phantasien.model.User;
-import de.tilliwilli.phantasien.providers.annotations.FromSession;
+import de.tilliwilli.phantasien.web.filters.UserFilter;
 
 public class ProvidersModule extends AbstractModule implements Constants {
 

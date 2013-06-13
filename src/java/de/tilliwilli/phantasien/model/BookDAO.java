@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import com.google.common.base.Optional;
 
-import de.tilliwilli.phantasien.providers.annotations.FromSession;
+import de.tilliwilli.phantasien.app.providers.annotations.FromSession;
 
 /**
  * <p>

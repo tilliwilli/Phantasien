@@ -18,7 +18,7 @@
 	<listener>
 		<listener-class>de.tilliwilli.phantasien.app.PhantasienServletContextListener</listener-class>
 	</listener>
-
+	
 	<!--	Although almost everything should be processed within our ContextListener, security setup for GAE
 			is most easily done with <security-constraint>s here, and Guice Servlets don't support setting
 			these up in Java -->
