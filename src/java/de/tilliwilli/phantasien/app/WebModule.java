@@ -28,23 +28,23 @@ public class WebModule extends ServletModule {
 	protected void configureServlets() {
 
 		// CharacterEncodingFilter defaults to use UTF-8, which is what we want
-		filter("/*").through(CharacterEncodingFilter.class);
+		filterRegex("/[^_]*").through(CharacterEncodingFilter.class);
 
 		// automatically clean up the ObjectifyService after usage
 		bind(ObjectifyFilter.class).in(Scopes.SINGLETON);
-		filter("/*").through(ObjectifyFilter.class);
+		filterRegex("/[^_]*").through(ObjectifyFilter.class);
 
 		// make sure to filter through GaeUserFilter _before_ UserFilter
-		filter("/*").through(GaeUserFilter.class);
-		filter("/*").through(UserFilter.class);
+		filterRegex("/[^_]*").through(GaeUserFilter.class);
+		filterRegex("/[^_]*").through(UserFilter.class);
 
 		// automatically change the request method when the associated field is present in a form
-		filter("/*").through(HiddenHttpMethodFilter.class);
+		filterRegex("/[^_]*").through(HiddenHttpMethodFilter.class);
 
 		// initialize and bind Restlet Servlet
 		Map<String, String> initParams = new HashMap<>();
 		initParams.put("org.restlet.application", TestApplication.class.getName());
 		bind(ServerServlet.class).in(Singleton.class);
-		serve("/*").with(ServerServlet.class, initParams);
+		serveRegex("/[^_]*").with(ServerServlet.class, initParams);
 	}
 }
