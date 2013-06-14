@@ -1,18 +1,13 @@
 package de.tilliwilli.phantasien.app;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.Filter;
 
-import org.restlet.ext.servlet.ServerServlet;
+import org.jboss.resteasy.plugins.server.servlet.FilterDispatcher;
 
 import com.google.inject.Scopes;
-import com.google.inject.Singleton;
 import com.google.inject.servlet.ServletModule;
 import com.googlecode.objectify.ObjectifyFilter;
 
-import de.tilliwilli.phantasien.web.TestApplication;
 import de.tilliwilli.phantasien.web.filters.CharacterEncodingFilter;
 import de.tilliwilli.phantasien.web.filters.GaeUserFilter;
 import de.tilliwilli.phantasien.web.filters.HiddenHttpMethodFilter;
@@ -41,10 +36,7 @@ public class WebModule extends ServletModule {
 		// automatically change the request method when the associated field is present in a form
 		filterRegex("/[^_]*").through(HiddenHttpMethodFilter.class);
 
-		// initialize and bind Restlet Servlet
-		Map<String, String> initParams = new HashMap<>();
-		initParams.put("org.restlet.application", TestApplication.class.getName());
-		bind(ServerServlet.class).in(Singleton.class);
-		serveRegex("/[^_]*").with(ServerServlet.class, initParams);
+		bind(FilterDispatcher.class).in(Scopes.SINGLETON);
+		filter("/*").through(FilterDispatcher.class);
 	}
 }

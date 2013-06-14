@@ -25,10 +25,10 @@
 		<dependency org="javax.servlet" name="jstl" rev="1.2" />
 		<dependency org="javax.el" name="javax.el-api" rev="2.2.4" />
 		
-		<dependency org="org.restlet.gae" name="org.restlet" rev="2.1.2" />
-		<dependency org="org.restlet.gae" name="org.restlet.ext.servlet" rev="2.1.2" />
-		<dependency org="org.restlet.gae" name="org.restlet.ext.freemarker" rev="2.1.2" />
-		
+		<dependency org="org.jboss.resteasy" name="resteasy-guice" rev="2.3.6.Final">
+			<exclude org="com.google.code.guice" name="guice" />
+		</dependency>
+
 		<!-- Guice for dependency injection -->
 		<dependency org="com.google.inject" name="guice" rev="3.0" />
 		<dependency org="com.google.inject.extensions" name="guice-servlet" rev="3.0" />

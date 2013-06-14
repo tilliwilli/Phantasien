@@ -3,6 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.5"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
+	<context-param>
+		<param-name>resteasy.scan.resources</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
 	<!-- Guice filter for injection of Requests, Responses, ServletContexts etc. -->
 	<filter>
 		<filter-name>guice-filter</filter-name>
@@ -17,6 +22,10 @@
 			all other filters/servlets/controllers and everything to inject -->
 	<listener>
 		<listener-class>de.tilliwilli.phantasien.app.PhantasienServletContextListener</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener</listener-class>
 	</listener>
 	
 	<!--	Although almost everything should be processed within our ContextListener, security setup for GAE

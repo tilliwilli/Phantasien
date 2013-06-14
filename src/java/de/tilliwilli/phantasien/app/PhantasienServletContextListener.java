@@ -15,13 +15,7 @@ public class PhantasienServletContextListener extends GuiceServletContextListene
 
 	@Override
 	protected Injector getInjector() {
-		//@formatter:off
-		return Guice.createInjector(
-				new BindingModule(),
-				new ProvidersModule(),
-				new WebModule()
-		);
-		//@formatter:on
+		return Guice.createInjector(new BindingModule(), new ProvidersModule(), new WebModule());
 	}
 
 }
