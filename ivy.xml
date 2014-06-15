@@ -34,7 +34,7 @@
 		<dependency org="com.google.inject.extensions" name="guice-servlet" rev="3.0" />
 
 		<!-- Objectify as a simple abstraction of the datastore API -->
-		<dependency org="com.googlecode.objectify" name="objectify" rev="4.0rc1">
+		<dependency org="com.googlecode.objectify" name="objectify" rev="5.0.3">
 			<exclude org="com.google.appengine" name="appengine-api-1.0-sdk"/>
 			<exclude org="com.google.appengine" name="appengine-api-labs"/>
 		</dependency>
@@ -44,7 +44,7 @@
 		<dependency org="org.slf4j" name="slf4j-jdk14" rev="1.7.5" />
 
 		<!-- Guava as a general-purpose language enhancement library -->
-		<dependency org="com.google.guava" name="guava" rev="14.0.1" />
+		<dependency org="com.google.guava" name="guava" rev="17.0" />
 
 		<!-- JSR-305 for @Nullable annotation -->
 		<dependency org="com.google.code.findbugs" name="jsr305" rev="2.0.1" />

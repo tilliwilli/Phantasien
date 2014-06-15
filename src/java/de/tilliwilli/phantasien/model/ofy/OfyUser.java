@@ -4,15 +4,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Cache;
-import com.googlecode.objectify.annotation.EmbedMap;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -33,8 +32,7 @@ class OfyUser implements User, OfyBaseEntity<OfyUser> {
 	@Id
 	private String id;
 
-	@EmbedMap
-	private Map<String, Object> settings = Maps.newHashMap();
+	private Map<String, Object> settings = new HashMap<>();
 
 	/**
 	 * Flag indicating that this user's profile should be publicly accessible.
@@ -103,6 +101,22 @@ class OfyUser implements User, OfyBaseEntity<OfyUser> {
 	public User setPublicProfile(boolean publicProfile) {
 		this.publicProfile = publicProfile;
 		return this;
+	}
+
+	@Override
+	public int hashCode() {
+		return id.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof OfyUser)) {
+			return false;
+		}
+		return ((OfyUser) obj).id.equals(id);
 	}
 
 }
