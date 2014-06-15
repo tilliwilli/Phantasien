@@ -1,8 +1,8 @@
 package de.tilliwilli.phantasien.model.ofy;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import com.google.common.collect.Sets;
 import com.googlecode.objectify.ObjectifyService;
 
 /**
@@ -14,7 +14,7 @@ class ObjectifyRegisterer {
 	/**
 	 * Static field holding all classes to register.
 	 */
-	private static Set<Class<?>> classes = Sets.newHashSet();
+	private static Set<Class<?>> classes = new HashSet<>();
 
 	static {
 		classes.add(OfyBook.class);

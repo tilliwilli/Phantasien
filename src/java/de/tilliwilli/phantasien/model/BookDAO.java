@@ -18,8 +18,8 @@ import de.tilliwilli.phantasien.app.providers.annotations.FromSession;
  * parameters, since these are bound to a user and the category's owner is used anyway.
  * </p>
  * <p>
- * An alternative is to annotate the BookDAO instance with {@link FromSession @SessionUser}, so it
- * automatically gets the user injected from the session.
+ * An alternative is to annotate the BookDAO instance with {@link FromSession}, so it automatically
+ * gets the user injected from the session.
  */
 public interface BookDAO {
 

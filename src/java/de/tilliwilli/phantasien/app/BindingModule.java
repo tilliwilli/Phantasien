@@ -8,8 +8,7 @@ import com.google.inject.Provides;
 import de.tilliwilli.phantasien.model.ofy.ObjectifyModule;
 
 /**
- * An {@link AbstractModule} that sets up all bindings that are independent from Serlvet or LimeMVC
- * contexts.
+ * An {@link AbstractModule} that sets up all bindings that are independent from web contexts.
  */
 public class BindingModule extends AbstractModule {
 
